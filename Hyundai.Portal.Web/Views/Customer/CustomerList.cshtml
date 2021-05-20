@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "CustomerList";
+}
+
+<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i>Customer Management</strong></a>
+<hr />
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-inline" role="form" id="frmCustomer">
+            <div class="form-group">
+                <label for="startDate" class="searchTitle">
+                    Search By</label>
+                <select id="searchKey" class="form-control">
+                    <option value="CustName">Customer Name</option>
+                    <option value="OwnerName">Owner Name</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" id="searchText" class="k-textbox" placeholder="Search text" />
+            </div>
+            <button id="btnSearch" type="button" class="btn btn-default">
+                Search</button>
+            <button id="btnRegister" type="button" class="btn btn-primary">
+                Register</button>
+        </form>
+    </div>
+</div>
+<div>
+    Total : <span id="totalCnt"></span>
+</div>
+<div id="CustomerList"></div>
+
+@using (Html.BeginForm("updateCustomer", "Customer", FormMethod.Post, new { role = "form", @class = "form-horizontal form-widgets", id = "frmCustomerDetail" }))
+{
+}
+
+@Html.Partial("_CustomerDetailRate")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var editCustomer = function (e) {
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            $("#frmCustomerDetail").load("/Customer/CustomerDetail?cidx=" + dataItem.cidx, function () {
+                $("#customerDetail").modal("show");
+            });
+        };
+
+        var editRate = function (e) {
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            $("#customerDetailRate").modal("show");
+            var gridObj = $("#rateList").data("kendoGrid");
+            gridObj.dataSource.options.transport.read.url = "/Customer/getRateList?cidx=" + dataItem.cidx;
+            gridObj.dataSource.read();
+            $("#customerDetailRate #cidx").val(dataItem.cidx);
+            //gridObj.dataSource.options.schema.model.fields.cidx.defaultValue = dataItem.cidx;
+        };
+
+        $("#CustomerList").kendoGrid({
+            height: 300,
+            autoSize: true,
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: "/Customer/getCustomerList"
+                },
+                pageSize: 20,
+                schema: {
+                    model: {
+                        id: "cidx",
+                        fields: {
+                            CustName: { validation: { required: true} },
+                            CustCity: { validation: { required: true} },
+                            CustState: { validation: { required: true} },
+                            OwnerName: { validation: { required: true} },
+                            WPhone: { validation: { required: true} },
+                            CPhone: { validation: { required: true} }
+                            /*UnitPrice: { type: "number", validation: { required: true, min: 1} },
+                            Discontinued: { type: "boolean" },
+                            UnitsInStock: { type: "number", validation: { min: 0, required: true} }*/
+                        }
+                    }
+                }
+            },
+            scrollable: {
+                virtual: true
+            },
+            columns: [
+                { field: "CustName", title: "Customer Name" },
+                { field: "CustCity", title: "City" },
+                { field: "CustState", title: "State" },
+                { field: "OwnerName", title: "Owner Name" },
+                { field: "WPhone", title: "WorkPhone" },
+                { field: "CPhone", title: "CellPhone" },
+
+                { command: [{ text: "Edit", click: editCustomer }, { text: "Rate", click: editRate}], title: "Command", width: 160 }
+            ],
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 10
+            },
+            editable: "popup",
+            dataBound: function (e) {
+                var cnt = $('#CustomerList').data('kendoGrid').dataSource.total();
+                $("#totalCnt").text(cnt);
+            }
+        });
+
+        $("#btnSearch").click(function () {
+            var gridObj = $("#CustomerList").data("kendoGrid");
+            gridObj.dataSource.transport.options.read.url = String.format("/Customer/getCustomerList?searchKey={0}&searchText={1}", $("#searchKey").val(), $("#searchText").val());
+            gridObj.dataSource.read();
+        });
+
+        $("#btnRegister").click(function () {
+            $("#frmCustomerDetail").load("/Customer/CustomerDetail", function () {
+                $("#customerDetail").modal("show");
+            });
+        });
+    });
+</script>

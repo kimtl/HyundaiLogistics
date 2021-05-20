@@ -1,0 +1,33 @@
+﻿@model HyundaiPortal.Business.Model.LoginModel
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Hyundai Freights Inc</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/bootstrap")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        <link href="/Content/login.css" rel="Stylesheet""/>
+    </head>
+    <body>
+<div class="container bootshape">
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "simple-login", role = "form" }))
+    {
+        <h1>Hyundai Freights</h1>
+        @Html.ValidationSummary()
+        @Html.TextBoxFor(m => m.UserName, new { autofocus = "true", required = "true", placeholder = "Username", @class = "form-control" })
+        @Html.PasswordFor(m => m.Password, new { required = "true", placeholder = "Password", @class = "form-control" })
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+        <!--<p class="forgot-password"><a href="">Forgot password?</a></p>-->
+        @Html.AntiForgeryToken()
+    }
+    <p class="footer">&copy; 2014 Hyundai. All Rights Reserved.</p>
+</div>
+</body>
+</html>

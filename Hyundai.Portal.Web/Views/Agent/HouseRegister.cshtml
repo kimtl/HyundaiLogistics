@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Master";
+}
+
+<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i>House BL 등록</strong></a>
+<hr />
+<div class="panel panel-default">
+    <div class="panel-body">
+        @using(Ajax.BeginForm("uploadHouseBL","BL",new AjaxOptions { HttpMethod="Post", OnSuccess="uploadComplete" }, new { @class="form-inline", role = "form", id="frmHbl", enctype="multipart/form-data"})) {
+            <div class="form-group">
+                <label for="startDate" class="searchTitle">
+                    Upload House BL(xls) </label>
+            </div>
+            <div class="form-group">
+                <input type="file" id="file" name="file" class="k-textbox w300" />
+            </div>
+            <input type="submit" id="btnRegister" class="btn btn-primary" />
+            <div>
+                @if (Request["ResultCode"] == "0")
+                {
+                    @Request["ResultMessage"] @:건의 데이터가 등록되었습니다.
+                }
+                else if (Request["ResultCode"] != null)
+                {
+                    @Request["ResultMessage"]
+                }
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    function uploadComplete(data) {
+        console.log(data);
+    }
+</script>
+

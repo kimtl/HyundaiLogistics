@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Generate Invoice";
+}
+
+<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i>Invoice 발행</strong></a>
+<hr />
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-inline" role="form" id="frmMBL">
+            <div class="form-group">
+                <label for="startDate" class="searchTitle">
+                On Board Date</label>
+                <input type="text" id="startDate" class="case_date w120" />
+                ~
+                <input type="text" id="endDate" class="case_date w120" />
+            </div>
+            <button id="btnSearch" type="button" class="btn btn-default">
+                Search</button>
+            <button id="btnGenerate" type="button" class="btn btn-primary">
+                Generate</button>
+        </form>
+    </div>
+</div>
+<div>
+    Total : <span id="totalCnt"></span>
+</div>
+<div id="CustomerList"></div>
+
+<script type="text/javascript">
+    var checkedids = [];
+
+    $(document).ready(function () {
+
+        var today = new Date();
+        $("#startDate").kendoDatePicker({
+            value: today
+        });
+        today.setDate(today.getDate() + 1);
+        $("#endDate").kendoDatePicker({
+            value: today
+        });
+
+
+        $("#CustomerList").kendoGrid({
+            height: 250,
+            autoSize: true,
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: "/Invoice/getCustomerList?startDate=" + $("#startDate").val() + "&endDate=" + $("#endDate").val()
+                },
+                pageSize: 20,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
+                schema: {
+                    model: {
+                        id: "midx",
+                        fields: {
+                            midx: { editable: false, nullable: true },
+                            onboardDate: { type: "date", validation: { required: true} },
+                            customerName: { validation: { required: true} },
+                            status: { validation: { required: true} },
+                            amount: { editable: false, nullable: true }
+                        }
+                    }
+                }
+            },
+            scrollable: {
+                virtual: true
+            },
+            columns: [
+                { field: "midx", width: 120, hidden: true },
+                { field: "", width: 30, "template": "<input type=\"checkbox\" class=\"selectbox\" />", attributes: { style: "text-align:center;"} },
+                { field: "customerName", width: 120, title: "Customer Name" },
+                { field: "amount", width: 120, title: "Amount" },
+                { field: "status", width: 120, title: "MBL Status" },
+                {
+                    field: "onboardDate",
+                    width: 80,
+                    title: "E.T.D",
+                    template: "#= kendo.toString(onboardDate, 'd') #"
+                },
+            ],
+            dataBound: function (e) {
+                $("#HBLList .selectbox").on("click", function () {
+                    var checked = this.checked,
+                    row = $(this).closest("tr"),
+                    grid = $("#CustomerList").data("kendoGrid"),
+                    dataItem = grid.dataItem(row);
+                    checkedids.push(dataItem.hidx);
+                });
+                var cnt = $('#CustomerList').data('kendoGrid').dataSource.total();
+                $("#totalCnt").text(cnt);
+            }
+        });
+
+        $("#btnSearch").click(function () {
+            var gridObj = $("#CustomerList").data("kendoGrid");
+            gridObj.dataSource.transport.options.read.url = String.format("/Invoice/getCustomerList?startDate={0}&endDate={1}", $("#startDate").val(), $("#endDate").val());
+            gridObj.dataSource.read();
+        });
+
+        $("#btnGenerate").click(function () {
+            if (checkedids.length == 0) {
+                alert("HBL을 선택해 주십시오.");
+                return;
+            }
+            var data = { hidx: checkedids };
+            var hblList = $("#CustomerList").data("kendoGrid").dataSource.view();
+            $.ajax({
+                type: "POST",
+                url: "/Invoice/generateInvoice",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+                success: function (e) {
+                    if (e.ResultCode == "0") {
+                        var gridObj = $("#CustomerList").data("kendoGrid");
+                        gridObj.dataSource.read();
+                    }
+                    else {
+                        alert(e.ResultMessage);
+                    }
+                }
+            });
+            checkedids = [];
+            $(".selectbox").removeAttr("checked");
+        });
+    });
+</script>

@@ -1,0 +1,122 @@
+﻿@model HyundaiPortal.Business.Model.ProductItemModel
+@{
+    Layout = null;
+}
+<div class="modal fade" id="itemDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×</button>
+                <h4 class="modal-title">
+                    아이템 정보관리</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>아이템명</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.itemName, new { @class = "k-textbox wfull" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>단가</b></div>
+                    <div class="col-xs-3">
+                        @Html.TextBoxFor(m => m.itemAmt, new { @class = "wfull case_amt" })
+                    </div>
+                    <div class="control-label col-xs-3">
+                        <b>수량</b></div>
+                    <div class="col-xs-3">
+                        @Html.TextBoxFor(m => m.itemQty, new { @class = "wfull case_num" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>합계</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.itemTotalAmt, new { @class = "wfull case_amt", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>브랜드</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.itemBrand, new { @class = "k-textbox wfull" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>웹 URL</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.url, new { @class = "k-textbox wfull" })
+                    </div>
+                </div>    
+                <div class="modal-footer">
+                    <button type="button" id="btnCreate" class="btn btn-primary">
+                        @(Model.pidx == null? "Create" : "Update")</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancel</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+@Html.HiddenFor(m => m.pidx)
+@Html.HiddenFor(m => m.hidx)
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#itemAmt").kendoNumericTextBox({
+            format: "c",
+            decimals: 2,
+            change: function (e) {
+                var val = parseFloat(e.sender.value());
+                $("#itemTotalAmt").data("kendoNumericTextBox").value(parseFloat($("#itemQty").data("kendoNumericTextBox").value()) * val);
+            }
+        });
+        $("#itemTotalAmt").kendoNumericTextBox({
+            format: "c",
+            decimals: 2
+        });
+        $("#itemQty").kendoNumericTextBox({
+            decimals: 0,
+            format: "#",
+            change: function (e) {
+                var val = parseFloat(e.sender.value());
+                $("#itemTotalAmt").data("kendoNumericTextBox").value(parseFloat($("#itemAmt").data("kendoNumericTextBox").value()) * val);
+            }
+        });
+        $("#btnCreate").click(function () {
+            if ($("#itemName").val() == "") {
+                alert("Item Name 을 입력해주세요.");
+            }
+            else if ($("#itemAmt").data("kendoNumericTextBox").value() == 0) {
+                alert("가격을 입력해 주세요.");
+            }
+            else if ($("#itemQty").data("kendoNumericTextBox").value() == 0) {
+                alert("수량을 입력해 주세요.");
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: $("#frmHouseItem").attr("action"),
+                    dataType: "json",
+                    data: $("#frmHouseItem").serializeArray(),
+                    success: function (e) {
+                        if (e.ResultCode == "0") {
+                            location.reload();
+                        }
+                        else {
+                            alert(e.ResultMessage);
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>

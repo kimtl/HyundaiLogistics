@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "Manifest";
+}
+
+<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i>Manifest Printout</strong></a>
+<hr />
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-inline" role="form" id="frmCustomer">
+            <div class="form-group">
+                <label for="startDate" class="searchTitle">
+                    Create Date</label>
+                <input type="text" id="startDate" class="case_date" /> ~
+                <input type="text" id="endDate" class="case_date" />
+                <button id="btnSearch" type="button" class="btn btn-default">
+                Search</button>
+            </div>
+            <div class="form-group">
+                <label for="mblNo" class="searchTitle">
+                    MBL</label>
+            </div>                
+            <button id="btnPrint" type="button" class="btn btn-primary">
+                Print</button>
+        </form>
+    </div>
+</div>
+<div id="MBLList"></div>
+<div id="HBLList"></div>
+
+<script type="text/javascript">
+    var checkedrows = {}, checkedrows2 = {};
+    var midx;
+
+    $(document).ready(function () {
+        var today = new Date();
+        $("#startDate").kendoDatePicker({
+            value: today
+        });
+        today.setDate(today.getDate() + 1);
+        $("#endDate").kendoDatePicker({
+            value: today
+        });
+
+        $("#btnSearch").click(function () {
+            checkedrows = {};
+            checkedrows2 = {};
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            $("#MBLList").data("kendoGrid").dataSource.transport.options.read.url = "/BL/getMBLList?searchKey=CreateDate&startDate=" + startDate + "&endDate=" + endDate;
+            $("#MBLList").data("kendoGrid").dataSource.read();
+        });
+
+        $("#btnPrint").click(function () {
+            if (midx == null) {
+                alert("Master BL 을 선택해 주세요.");
+            }
+            else {
+                location.href = "DownloadPDF?midx=" + midx;
+            }
+        });
+
+        $("#MBLList").kendoGrid({
+            height: 200,
+            autoSize: true,
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: "/BL/getMBLList?searchKey=OnBoardDate&startDate=" + $("#startDate").val() + "&endDate=" + $("#endDate").val()
+                },
+                pageSize: 20,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
+                schema: {
+                    model: {
+                        id: "midx",
+                        fields: {
+                            midx: { editable: false, nullable: true },
+                            mblNo: { validation: { required: true} },
+                            ShipperName: { validation: { required: true} },
+                            CneeName: { validation: { required: true} },
+                            DestName: { validation: { required: true} },
+                            TotalAmt: { validation: { required: true} },
+                            CreateDate: { type: "date", validation: { required: true} }
+                        }
+                    }
+                }
+            },
+            scrollable: {
+                virtual: true
+            },
+            selectable: true,
+            columns: [
+                { field: "mblNo", title: "MBL No" },
+                { field: "ShipperName", title: "Shipper Name" },
+                { field: "CneeName", title: "Consignee Name" },
+                { field: "DestName", title: "Destination" }
+            ],
+            change: function (e) {
+                var selectedData = this.dataItem(this.select());
+                midx = selectedData.midx;
+                $("#HBLList").data("kendoGrid").dataSource.options.transport.read.url = "/BL/getHBLList?searchKey=mblNo&searchText=" + selectedData.mblNo;
+                $("#HBLList").data("kendoGrid").dataSource.read();
+            }
+        });
+
+        $("#HBLList").kendoGrid({
+            height: 300,
+            autoSize: true,
+            autoBind: false,
+            dataSource: {
+                transport: {
+                    dataType: "json",
+                    read: "/BL/getHBLList"
+                },
+                pageSize: 20,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
+                schema: {
+                    model: {
+                        id: "hidx",
+                        fields: {
+                            hidx: { editable: false, nullable: true },
+                            midx: { defaultValue: midx },
+                            mblNo: { validation: { required: true} },
+                            HblNo: { validation: { required: true} },
+                            OnBoardDate: { type: "date" },
+                            ShipperName: { validation: { required: true} },
+                            ConsigneeName: { validation: { required: true} },
+                            CreateDate: { type: "date" }
+                        }
+                    }
+                }
+            },
+            scrollable: {
+                virtual: true
+            },
+            columns: [
+                { field: "mblNo", title: "MBL No" },
+                { field: "HblNo", title: "HBL No" },
+                {
+                    field: "OnBoardDate",
+                    title: "발송일자",
+                    template: "#= kendo.toString(OnBoardDate, 'g') #"
+                },
+                { field: "ShipperName", title: "Shipper Name" },
+                { field: "ConsigneeName", title: "Consignee Name" },
+                {
+                    field: "CreateDate",
+                    title: "등록일자",
+                    template: "#= kendo.toString(CreateDate, 'g') #"
+                }
+            ],
+            dataBound: function (e) {
+                $("#HBLList .selectbox").on("click", function () {
+                    var checked = this.checked,
+                    row = $(this).closest("tr"),
+                    grid = $("#HBLList").data("kendoGrid"),
+                    dataItem = grid.dataItem(row);
+                    checkedrows[dataItem.uid] = checked;
+                });
+            }
+        });
+    });
+</script>

@@ -1,0 +1,524 @@
+﻿@model HyundaiPortal.Business.Model.MBLModel
+@{
+    ViewBag.Title = "MBL";
+}
+<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i>Master BL 관리</strong></a>
+<hr />
+@using (Html.BeginForm("updateMBL", "BL", FormMethod.Post, new { role = "form", @class = "", id = "frmMBLDetail" }))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Shipper and Consignee information</div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>MBL No</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.mblNo, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Status</b></div>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.status, new SelectList(Model.statusList, "cdidx", "CDNAME"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Shipper</b></div>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.ShipperCd, new SelectList(Model.shipperList, "cidx", "CustName"), new { @class = "form-control" })
+                </div>
+                <div class="col-xs-3">
+                    <input type="button" id="btnApplyShipper" class="btn btn-default" value="Apply" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Shipper Name</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ShipperName, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group hide">
+                <div class="control-label col-xs-3">
+                    <b>Shipper ZipCode</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ShipperZip, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group hide">
+                <div class="control-label col-xs-3">
+                    <b>Shipper State</b></div>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.ShipperState, new SelectList(commonConst.US_STATES, Model.ShipperState), new { @class = "form-control" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Shipper City</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ShipperCity, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group hide">
+                <div class="control-label col-xs-3">
+                    <b>Shipper Address1</b></div>
+                <div class="col-xs-9">
+                    @Html.TextBoxFor(m => m.ShipperAddress1, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group hide">
+                <div class="control-label col-xs-3">
+                    <b>Shipper Address2</b></div>
+                <div class="col-xs-9">
+                    @Html.TextBoxFor(m => m.ShipperAddress2, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Shipper Full Address</b></div>
+                <div class="col-xs-9">
+                    @Html.TextAreaFor(m => m.ShipperFullAddress, new { @class = "k-textbox wfull", rows = 4 })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Consignee</b></div>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.CneeCd, new SelectList(Model.consigneeList, "cidx", "CustName"), new { @class = "form-control" })
+                </div>
+                <div class="col-xs-3">
+                    <input type="button" id="btnApplyCnee" class="btn btn-default" value="Apply" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Consignee Name</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.CneeName, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group hide">
+                <div class="control-label col-xs-3">
+                    <b>Consignee ZipCode</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.CneeZip, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Consignee Phone</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.CneePhone, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group hide">
+                <div class="control-label col-xs-3">
+                    <b>Consignee State</b></div>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.CneeState, new SelectList(commonConst.US_STATES, Model.CneeState), new { @class = "form-control" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Consignee City</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.CneeCity, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group hide">
+                <div class="control-label col-xs-3">
+                    <b>Consignee Address1</b></div>
+                <div class="col-xs-9">
+                    @Html.TextBoxFor(m => m.CneeAddress1, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group hide">
+                <div class="control-label col-xs-3">
+                    <b>Consignee Address2</b></div>
+                <div class="col-xs-9">
+                    @Html.TextBoxFor(m => m.CneeAddress2, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Consignee Full Address</b></div>
+                <div class="col-xs-9">
+                    @Html.TextAreaFor(m => m.CneeFullAddress, new { @class = "k-textbox wfull", rows = 4 })
+                </div>
+            </div>
+        </div>
+        <div class="panel-heading">
+            Flight Information</div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Flight No</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.FltNo, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Flight Date</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.FltDate, new { @class = "wfull case_date" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Arrival Date</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ArrivalDate, new { @class = "wfull case_date" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>To 1</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.To1, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>By 1</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.By1, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>To 2</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.To2, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>By 2</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.By2, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Currency</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.Currency, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Chgs Code</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ChagsCode, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>WT/VAL PPD</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.WTVALPPD, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>WT/VAL COL</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.WTVALCOL, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>OTHER PPD</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.OTHERPPD, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>OTHER COL</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.OTHERCOL, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Declared Value for Carriage</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.DeclaredValueForCarriage, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Declared Value for Customs</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.DeclaredValueForCustoms, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+        </div>
+        <div class="panel-heading">
+            Routing and Destination</div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Issuing Carrier's Agent Name and City</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.IssuingCarrierName, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Accounting Information</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.AccountingInfo, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Agent's IATA Code</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.IATA, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Account No</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.AccountNo, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Flight Carrier</b></div>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.NotNetiableCustCd, new SelectList(Model.flightList, "cidx", "CustName"), new { @class = "form-control" })
+                </div>
+                <div class="col-xs-3">
+                    <input type="button" id="btnApplyFlight" class="btn btn-default" value="Apply" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Not Negotiable</b></div>
+                <div class="col-xs-9">
+                    @Html.TextAreaFor(m => m.NotNetiableText, new { @class = "k-textbox wfull", rows = 4 })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Airport Code of Departure</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.DptrCd, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Airport Name of Departure</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.DptrName, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Airport Code of Destination</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.DestCd, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Airport Name of Destination</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.DestName, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Handling Information</b></div>
+                <div class="col-xs-9">
+                    @Html.TextBoxFor(m => m.HandlingInfo, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+        </div>
+        <div class="panel-heading">
+            Cost of packages</div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Piece of Package</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.PKGS, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Gross Weight</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.GrossWT, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Weight Type</b></div>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.WTType, new SelectList(Model.weightTypeList, "cdidx", "CDNAME"), new { @class = "form-control" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Rate Class</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.RateClass, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>VWT</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.VWT, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Chargeable Weight</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.CWT, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Rate Change</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.RateChange, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Total Amount</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.FltTotalAmt, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Nature and Quantity of Goods</b></div>
+                <div class="col-xs-9">
+                    @Html.TextAreaFor(m => m.NatureQuantityods, new { @class = "k-textbox wfull", rows = 10 })
+                </div>
+            </div>
+        </div>
+        <div class="panel-heading">
+                Other Charge</div>
+        <div class="panel-body form-horizontal">
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        Fee Name
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                </tr>
+                @for (var i = 0; i < 5; i++)
+                {
+                <tr>
+                    <td>
+                        @Html.TextBox("otherChargeList["+i+"].chargeCD", Model.otherChargeList[i].chargeCd, new { @class = "form-control wfull", maxLength = 10 })
+                    </td>
+                    <td>
+                        @Html.TextBox("otherChargeList["+i+"].ChargeAmt", Model.otherChargeList[i].ChargeAmt, new { @class = "case_amount wfull" })
+                    </td>
+                </tr>
+                    @Html.Hidden("otherChargeList[" + i + "].ocidx", Model.otherChargeList[i].ocidx)
+                }
+            </table>
+        </div>
+        <div class="panel-heading">
+            Other</div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Signature of Shipper or its Agent</b></div>
+                <div class="col-xs-9">
+                    @Html.TextBoxFor(m => m.SignatureOfShipperOrAgent, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Signature of Issuring Carrier or its Agent</b></div>
+                <div class="col-xs-9">
+                    @Html.TextBoxFor(m => m.SignatureOfIssuingCarrierOrAgent, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-3 col-xs-9 btnArea">
+                    <button type="button" id="btnPDF" class="btn btn-default">MBLPRINT</button>
+                    <button type="button" id="btnList" class="btn btn-default">List</button>
+                    <button type="submit" id="btnDelete" class="btn btn-danger">Delete</button>
+                    <button type="submit" id="btnSave" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.midx)
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".case_date").kendoDatePicker();
+        $(".case_amount").kendoNumericTextBox();
+        $("#btnList").click(function () {
+            history.back();
+        });
+
+
+        $("#btnPDF").click(function () {
+            $.ajax({
+                url: "/BL/MBLPDF",
+                data: { midx: $("#midx").val() },
+                success: function (result) {
+                    window.open(result.SmallUrl, "", "");
+                },
+                dataType: "json"
+            });
+        });
+
+        $("#btnApplyShipper").click(function () {
+            $.ajax({
+                url: "/Customer/getCustomerInfo",
+                data: { cidx: $("#ShipperCd").val() },
+                success: function (result) {
+                    $("#ShipperName").val(result.CustEngName);
+                    $("#ShipperZip").val(result.CustZip);
+                    $("#ShipperState").val(result.CustState);
+                    $("#ShipperCity").val(result.CustCity);
+                    $("#ShipperAddress1").val(result.CustAddress1);
+                    $("#ShipperAddress2").val(result.CustAddress2);
+                    $("#ShipperFullAddress").val(result.CustFullAddress);
+                },
+                dataType: "json"
+            });
+        });
+
+        $("#btnApplyCnee").click(function () {
+            $.ajax({
+                url: "/Customer/getCustomerInfo",
+                data: { cidx: $("#CneeCd").val() },
+                success: function (result) {
+                    $("#CneeName").val(result.CustEngName);
+                    $("#CneeZip").val(result.CustZip);
+                    $("#CneeState").val(result.CustState);
+                    $("#CneeCity").val(result.CustCity);
+                    $("#CneeAddress1").val(result.CustAddress1);
+                    $("#CneeAddress2").val(result.CustAddress2);
+                    $("#CneeFullAddress").val(result.CustFullAddress);
+                    $("#CneePhone").val(result.WPhone);
+                },
+                dataType: "json"
+            });
+        });
+
+        $("#btnApplyFlight").click(function () {
+            $.ajax({
+                url: "/Customer/getCustomerInfo",
+                data: { cidx: $("#NotNetiableCustCd").val() },
+                success: function (result) {
+                    var addrtext = result.CustEngName + " " + result.CustAddress1 + " " + result.CustAddress2 + " " + result.CustCity + " " + result.CustState;
+                    addrtext += " " + result.CustZip + " TEL:" + result.WPhone + " FAX:" + result.Fax
+
+                    $("#NotNetiableText").val(result.CustFullAddress);
+                },
+                dataType: "json"
+            });
+        });
+
+        $("#btnDelete").click(function () {
+            var q = confirm("현재 MBL 을 삭제합니다.");
+            if (q) {
+                $.ajax({
+                    type: "POST",
+                    url: "/BL/deleteMBL",
+                    data: { midx: $("#midx").val() },
+                    success: function (e) {
+                        if (e.ResultCode == "0") {
+                            location.href = "/BL/Master";
+                        }
+                        else if (e.ResultCode == "-1") {
+                            alert(e.ResultMessage);
+                        }
+                        else if (e.ResultCode == "-2") {
+                            alert("이미 출고 처리된 항목입니다.");
+                        }
+                    },
+                    dataType: "json"
+                });
+            }
+
+            return false;
+        });
+    });
+</script>

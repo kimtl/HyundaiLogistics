@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyundaiPortal.Business", "HyundaiPortal.Business\HyundaiPortal.Business.csproj", "{E4A0EB17-CB06-45F2-8609-63C6DFF298D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HyundaiPortal.Web", "Hyundai.Portal.Web\HyundaiPortal.Web.csproj", "{B77123B1-83FE-446B-A2FE-17854DCC49DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4A0EB17-CB06-45F2-8609-63C6DFF298D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4A0EB17-CB06-45F2-8609-63C6DFF298D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4A0EB17-CB06-45F2-8609-63C6DFF298D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4A0EB17-CB06-45F2-8609-63C6DFF298D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B77123B1-83FE-446B-A2FE-17854DCC49DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B77123B1-83FE-446B-A2FE-17854DCC49DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B77123B1-83FE-446B-A2FE-17854DCC49DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B77123B1-83FE-446B-A2FE-17854DCC49DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://kimtl.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = HyundaiPortal.Business\\HyundaiPortal.Business.csproj
+		SccProjectName1 = HyundaiPortal.Business
+		SccLocalPath1 = HyundaiPortal.Business
+		SccProjectUniqueName2 = Hyundai.Portal.Web\\HyundaiPortal.Web.csproj
+		SccProjectName2 = Hyundai.Portal.Web
+		SccLocalPath2 = Hyundai.Portal.Web
+	EndGlobalSection
+EndGlobal

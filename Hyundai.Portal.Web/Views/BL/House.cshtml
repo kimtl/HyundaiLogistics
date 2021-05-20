@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "Master";
+}
+
+<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i>House BL 관리</strong></a>
+<hr />
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-inline" role="form" id="frmMBL">
+            <div class="form-group">
+                @Html.DropDownList("status", new SelectList(ViewBag.statusList, "cdidx", "CDNAME"),"ALL" , new { @class = "form-control" })
+                <label for="startDate" class="searchTitle">
+                On Board Date</label>
+                <input type="text" id="startDate" class="case_date w120" />
+                ~
+                <input type="text" id="endDate" class="case_date w120" />
+                <label for="searchKey" class="searchTitle">
+                    Search By</label>
+                <select id="searchKey" class="form-control">
+                    <option value="mblNo">Master BL No</option>
+                    <option value="hblNo">House BL No</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" id="searchText" class="k-textbox w150" placeholder="Search text" />
+            </div>
+            <button id="btnSearch" type="button" class="btn btn-default">
+                Search</button>
+            <button id="btnRegister" type="button" class="btn btn-primary">
+                Register</button>
+            <button id="btnDelete" type="button" class="btn btn-danger">
+                Delete</button>
+        </form>
+    </div>
+</div>
+<div>
+    Total : <span id="totalCnt"></span>
+</div>
+<div id="HBLList"></div>
+
+@using (Html.BeginForm("updateUser", "User", FormMethod.Post, new { role = "form", @class = "form-horizontal form-widgets", id = "frmUserDetail" }))
+{
+}
+
+<script type="text/javascript">
+    var checkedids = [];
+
+    $(document).ready(function () {
+        var editUser = function (e) {
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            location.href = "/BL/HBLDetail?hidx=" + dataItem.hidx;
+        };
+
+        var today = new Date();
+        $("#startDate").kendoDatePicker({
+            value: today
+        });
+        today.setDate(today.getDate() + 1);
+        $("#endDate").kendoDatePicker({
+            value: today
+        });
+
+
+        $("#HBLList").kendoGrid({
+            height: 250,
+            autoSize: true,
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: "/BL/getHBLList?startDate="+$("#startDate").val() +"&endDate=" + $("#endDate").val()
+                },
+                pageSize: 20,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
+                schema: {
+                    model: {
+                        id: "hidx",
+                        fields: {
+                            hidx: { editable: false, nullable: true },
+                            mblNo: { validation: { required: true} },
+                            HblNo: { validation: { required: true} },
+                            OnBoardDate: { type: "date", validation: { required: true} },
+                            ShipperName: { validation: { required: true} },
+                            ConsigneeName: { validation: { required: true} },
+                            CreateDate: { type: "date", validation: { required: true} }
+                        }
+                    }
+                }
+            },
+            scrollable: {
+                virtual: true
+            },
+            columns: [
+                { field: "", width: 30, "template": "<input type=\"checkbox\" class=\"selectbox\" />", attributes: { style: "text-align:center;"} },
+                { field: "mblNo", width: 110, title: "MBL No" },
+                { field: "HblNo", width: 120, title: "HBL No" },
+                { field: "Status", width: 120, title: "Status" },
+                {
+                    field: "OnBoardDate",
+                    width: 80,
+                    title: "E.T.D",
+                    template: "#= kendo.toString(OnBoardDate, 'd') #"
+                },
+                { field: "ShipperName", title: "Shipper Name" },
+                { field: "ConsigneeName", title: "Consignee Name" },
+                {
+                    field: "CreateDate",
+                    width: 100,
+                    title: "Create Date",
+                    template: "#= kendo.toString(CreateDate, 'd') #"
+                },
+                { field: "Weight", width: 60, title: "Weight" },
+                { field: "WeightType", width: 50, title: "Type" },
+                { command: [{ text: "Edit", click: editUser}], width: 80, title: "Command" }
+            ],
+            dataBound: function (e) {
+                $("#HBLList .selectbox").on("click", function () {
+                    var checked = this.checked,
+                    row = $(this).closest("tr"),
+                    grid = $("#HBLList").data("kendoGrid"),
+                    dataItem = grid.dataItem(row);
+                    checkedids.push(dataItem.hidx);
+                });
+                var cnt = $('#HBLList').data('kendoGrid').dataSource.total();
+                $("#totalCnt").text(cnt);
+            }
+        });
+
+        $("#btnSearch").click(function () {
+            var gridObj = $("#HBLList").data("kendoGrid");
+            gridObj.dataSource.transport.options.read.url = String.format("/BL/getHBLList?searchKey={0}&searchText={1}&status={2}&startDate={3}&endDate={4}", $("#searchKey").val(), $("#searchText").val(), $("#status").val(), $("#startDate").val(), $("#endDate").val());
+            gridObj.dataSource.read();
+        });
+
+        $("#btnRegister").click(function () {
+            location.href = "/BL/HBLDetail";
+        });
+
+        $("#btnDelete").click(function () {
+            if (checkedids.length == 0) {
+                alert("HBL을 선택해 주십시오.");
+                return;
+            }
+            var data = { hidx: checkedids };
+            var hblList = $("#HBLList").data("kendoGrid").dataSource.view();
+            $.ajax({
+                type: "POST",
+                url: "/BL/deleteHBL",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+                success: function (e) {
+                    if (e.ResultCode == "0") {
+                        var gridObj = $("#HBLList").data("kendoGrid");
+                        gridObj.dataSource.read();
+                    }
+                    else {
+                        alert(e.ResultMessage);
+                    }
+                }
+            });
+            checkedids = [];
+            $(".selectbox").removeAttr("checked");
+        });
+    });
+</script>

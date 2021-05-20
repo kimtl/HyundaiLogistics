@@ -1,0 +1,199 @@
+﻿@model HyundaiPortal.Business.Model.CustomerModel
+@{
+    Layout = null;
+}
+<div class="modal fade" id="customerDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×</button>
+                <h4 class="modal-title">
+                    거래처 상세정보</h4> 
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>거래처 종류</b></div>
+                    <div class="col-xs-3">
+                        @Html.DropDownListFor(m => m.CustomerType, new SelectList(Model.customerTypeList, "cdidx", "CDNAME"), new { @class = "form-control" })
+                    </div>
+                    <div class="control-label col-xs-3">
+                        <b>거래처 코드</b></div>
+                    <div class="col-xs-3">
+                        @Html.TextBoxFor(m => m.CustomerCd, new { @class = "k-textbox wfull", maxlength = 10  })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>거래처 상호</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.CustName, new { @class = "k-textbox wfull", maxlength = 30 })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>영문 상호</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.CustEngName, new { @class = "k-textbox wfull", maxlength = 30 })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>주소1</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.CustAddress1, new { @class = "k-textbox wfull", maxlength = 50 })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>주소2</b></div>
+                    <div class="col-xs-4">
+                        @Html.TextBoxFor(m => m.CustAddress2, new { @class = "k-textbox wfull", maxlength = 50 })
+                    </div>
+                    <div class="control-label col-xs-2">
+                        <b>우편번호</b></div>
+                    <div class="col-xs-3">
+                        @Html.TextBoxFor(m => m.CustZip, new { @class = "k-textbox wfull", maxlength = 10 })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>도시</b></div>
+                    <div class="col-xs-4">
+                        @Html.TextBoxFor(m => m.CustCity, new { @class = "k-textbox wfull", maxlength = 30 })
+                    </div>
+                    <div class="control-label col-xs-2">
+                        <b>주</b></div>
+                    <div class="col-xs-3">
+                        @Html.DropDownListFor(m => m.CustState, new SelectList(commonConst.US_STATES, Model.CustState), new { @class="form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>전체주소</b></div>
+                    <div class="col-xs-9">
+                        <input type="button" class="btn btn-default" id="btnApplyAddr" value="주소적용" />
+                        @Html.TextAreaFor(m => m.CustFullAddress, new { @class = "k-textbox wfull", rows="4"})
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>대표자명</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.OwnerName, new { @class = "k-textbox wfull", maxlength = 20 })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>Tax ID</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.TaxId, new { @class = "k-textbox wfull", maxlength = 11 })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>사무실 전화</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.WPhone, new { @class = "k-textbox wfull", maxlength = 20 })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>휴대폰 번호</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.CPhone, new { @class = "k-textbox wfull", maxlength = 20 })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>Fax</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.Fax, new { @class = "k-textbox wfull", maxlength = 20 })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>특별통관 지정업체 번호</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.SpecialClearanceNo, new { @class = "k-textbox wfull", maxlength = 20 })
+                    </div>
+                </div>
+                    
+                <div class="modal-footer">
+                    <button type="button" id="btnCreate" class="btn btn-primary">
+                        @(Model.cidx == null? "Create" : "Update")</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancel</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+@Html.HiddenFor(m => m.cidx)
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnApplyAddr").click(function () {
+            var address = $("#CustEngName").val() + "\r" +
+                $.trim($("#CustAddress1").val() + " " + $("#CustAddress2").val()) + ",\r " +
+                $("#CustCity").val() + " " + $("#CustState").val() + " " + $("#CustZip").val() + ",\r" +
+                "UNITED STATES";
+            $("#CustFullAddress").val(address);
+        });
+        $("#btnCreate").click(function () {
+            if ($("#CustomerCd").val() == "") {
+                alert("거래처 코드를 입력해주세요.");
+            }
+            else if ($("#CustName").val() == "") {
+                alert("거래처 상호를 입력해주세요.");
+            }
+            else if ($("#CustEngName").val() == "") {
+                alert("거래처 영문상호를 입력해주세요.");
+            }
+            else if ($("#CustAddress1").val() == "") {
+                alert("주소1을 입력해주세요.");
+            }
+            else if ($("#CustAddress2").val() == "") {
+                alert("주소2을 입력해주세요.");
+            }
+            else if ($("#CustZip").val() == "") {
+                alert("Zipcode를 입력해주세요.");
+            }
+            else if ($("#CustCity").val() == "") {
+                alert("City를 입력해주세요.");
+            }
+            else if ($("#CustFullAddress").val() == "") {
+                alert("전체 주소를 입력해주세요.");
+            }
+            else if ($("#OwnerName").val() == "") {
+                alert("대표자명 입력해주세요.");
+            }
+            else if ($("#WPhone").val() == "") {
+                alert("사무실번호를 입력해주세요.");
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: $("#frmCustomerDetail").attr("action"),
+                    dataType: "json",
+                    data: $("#frmCustomerDetail").serializeArray(),
+                    success: function (e) {
+                        if (e.ResultCode == "0") {
+                            $("#customerDetail").modal("hide");
+                            var gridObj = $("#CustomerList").data("kendoGrid");
+                            gridObj.dataSource.read();
+                        }
+                        else {
+                            alert(e.ResultMessage);
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>

@@ -1,0 +1,83 @@
+﻿@model HyundaiPortal.Business.Model.RateModel
+@{
+    Layout = null;
+}
+<div class="modal fade" id="rateDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×</button>
+                <h4 class="modal-title">
+                    요율 상세정보</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>적용 일자</b></div>
+                    <div class="col-xs-3">
+                        @Html.TextBoxFor(m => m.applyDate, new { @class = "wfull" })
+                    </div>
+                    <div class="control-label col-xs-3">
+                        <b>무게 단위</b></div>
+                    <div class="col-xs-3">
+                        @Html.DropDownListFor(m=>m.weightType, new SelectList(Model.weightTypeList, "cdidx", "CDNAME"), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>기본 요율</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.baseRate, new { @class = "k-textbox wfull" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>추가 요율</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.extraRate, new { @class = "k-textbox wfull" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnCreate" class="btn btn-primary">
+                        @(Model.ridx == null? "Create" : "Update")</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancel</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+@Html.HiddenFor(m => m.ridx)
+@Html.HiddenFor(m => m.cidx)
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#applyDate").kendoDatePicker();
+
+        $("#btnCreate").click(function () {
+            var data = $("#frmRateDetail").serializeArray();
+
+            $.ajax({
+                type: "POST",
+                url: $("#frmRateDetail").attr("action"),
+                dataType: "json",
+                data: data,
+                success: function (e) {
+                    if (e.ResultCode == "0") {
+                        $("#rateDetail").modal("hide");
+                        var gridObj = $("#rateList").data("kendoGrid");
+                        gridObj.dataSource.read();
+                    }
+                    else {
+                        alert(e.ResultMessage);
+                    }
+                }
+            });
+        });
+    });
+</script>

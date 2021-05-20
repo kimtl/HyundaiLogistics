@@ -1,0 +1,93 @@
+﻿@model HyundaiPortal.Business.Model.UserModel
+@{
+    Layout = null;
+    }
+<div class="modal fade" id="userDetail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×</button>
+                <h4 class="modal-title">
+                    사용자 상세정보</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>아이디</b></div>
+                    <div class="col-xs-3">
+                        @Html.TextBoxFor(m => m.userid, new { @class = "k-textbox wfull required" })
+                    </div>
+                    <div class="control-label col-xs-3">
+                        <b>비밀번호</b></div>
+                    <div class="col-xs-3">
+                        @Html.TextBoxFor(m => m.password, new { @class = "k-textbox wfull" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>사용자 타입</b></div>
+                    <div class="col-xs-9">
+                        @Html.DropDownListFor(m=>m.UserType, new SelectList(Model.userTypeList, "cdidx", "CDNAME"), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>소속 거래처</b></div>
+                    <div class="col-xs-9">
+                        @Html.DropDownListFor(m => m.cidx, new SelectList(Model.customerList, "cidx", "CustName", Model.UserType), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-3">
+                        <b>이메일</b></div>
+                    <div class="col-xs-9">
+                        @Html.TextBoxFor(m => m.UserEmail, new { @class = "k-textbox wfull", maxlength = 50 })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnCreate" class="btn btn-primary">
+                        @(Model.uidx == null? "Create" : "Update")</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancel</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+@Html.HiddenFor(m => m.uidx)
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnCreate").click(function () {
+            if ($("#userid").val() == "") {
+                alert("User ID 를 입력해주세요");
+            }
+            else if ($("#password").val() == "") {
+                alert("Passowrd 를 입력해주세요");
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: $("#frmUserDetail").attr("action"),
+                    dataType: "json",
+                    data: $("#frmUserDetail").serializeArray(),
+                    success: function (e) {
+                        if (e.ResultCode == "0") {
+                            $("#userDetail").modal("hide");
+                            var gridObj = $("#UserList").data("kendoGrid");
+                            gridObj.dataSource.read();
+                        }
+                        else {
+                            alert(e.ResultMessage);
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>

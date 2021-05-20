@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "UserList";
+}
+
+<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i>User Management</strong></a>
+<hr />
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-inline" role="form" id="frmCustomer">
+            <div class="form-group">
+                <label for="startDate" class="searchTitle">
+                    Search By</label>
+                <select id="searchKey" class="form-control">
+                    <option value="UserName">User Name</option>
+                    <option value="UserID">User ID</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" id="searchText" class="k-textbox" placeholder="Search text" />
+            </div>
+            <button id="btnSearch" type="button" class="btn btn-default">
+                Search</button>
+            <button id="btnRegister" type="button" class="btn btn-primary">
+                Register</button>
+        </form>
+    </div>
+</div>
+<div>
+    Total : <span id="totalCnt"></span>
+</div>
+<div id="UserList"></div>
+
+@using (Html.BeginForm("updateUser", "User", FormMethod.Post, new { role = "form", @class = "form-horizontal form-widgets", id = "frmUserDetail" }))
+{
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var editUser = function (e) {
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            $("#frmUserDetail").load("/User/UserDetail?uidx=" + dataItem.uidx, function () {
+                $("#userDetail").modal("show");
+            });
+        };
+
+        
+        $("#UserList").kendoGrid({
+            height: 300,
+            autoSize: true,
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: "/User/getUserList"
+                },
+                pageSize: 20,
+                schema: {
+                    model: {
+                        id: "uidx",
+                        fields: {
+                            uidx: { editable: false, nullable: true },
+                            userid: { validation: { required: true} },
+                            UserName: { validation: { required: true} },
+                            CustName: { validation: { required: true} },
+                            UserEmail: { validation: { required: true} },
+                            RegDate: { validation: { required: true}, type: "date" },
+                            UserType: { validation: { required: true} }
+                        }
+                    }
+                }
+            },
+            scrollable: {
+                virtual: true
+            },
+            columns: [
+                { field: "userid", title: "아이디" },
+                { field: "UserName", title: "성명" },
+                { field: "CustName", title: "고객사명" },
+                { field: "UserEmail", title: "이메일" },
+                {
+                    field: "RegDate",
+                    title: "등록일자",
+                    template: "#= kendo.toString(RegDate, 'g') #"
+                },
+                { field: "UserType", title: "유저타입" },
+
+                { command: [{ text: "Edit", click: editUser }], title: "Command" }
+            ],
+            editable: "popup",
+            pageable: {
+                refresh: true,
+                pageSizes: true,
+                buttonCount: 10
+            },
+            dataBound: function (e) {
+                var cnt = $('#UserList').data('kendoGrid').dataSource.total();
+                $("#totalCnt").text(cnt);
+            }
+        });
+
+        $("#btnSearch").click(function () {
+            var gridObj = $("#UserList").data("kendoGrid");
+            gridObj.dataSource.transport.options.read.url = String.format("/User/getUserList?searchKey={0}&searchText={1}", $("#searchKey").val(), $("#searchText").val());
+            gridObj.dataSource.read();
+        });
+
+        $("#btnRegister").click(function () {
+            $("#frmUserDetail").load("/User/UserDetail", function () {
+                $("#userDetail").modal("show");
+            });
+        });
+    });
+</script>

@@ -1,0 +1,298 @@
+﻿@model HyundaiPortal.Business.Model.HBLModel
+@{
+    ViewBag.Title = "HBL";
+}
+<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i>House BL 관리</strong></a>
+<hr />
+@using (Html.BeginForm("updateHBL", "BL", FormMethod.Post, new { role = "form", @class = "", id = "frmHBLDetail" }))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Shipping information</div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>HBL No</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.HblNo, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Status</b></div>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.Status, new SelectList(Model.statusList, "cdidx", "CDNAME"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Shipper Name</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ShipperName, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Shipper Code</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ShipperCd, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Shipper Phone</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ShipperPhone, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Shipper ZipCode</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ShipperZipCode, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Shipper City</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ShipperCity, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Shipper State</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ShipperState, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Shipper Address</b></div>
+                <div class="col-xs-9">
+                    @Html.TextBoxFor(m => m.ShipperAddress, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Consignee Name</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ConsigneeName, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Consignee English Name</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ConsigneeEngName, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Consignee Phone</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ConsigneePhone, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Consignee Cellphone</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ConsigneeCellPhone, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Jumin No</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.juminNo, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Consignee Type</b></div>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.ConsigneeType, new SelectList(Model.consigneeTypeList, "cdidx", "CDNAME"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Clearance Type</b></div>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.IsGeneralClearance, new SelectList(Model.clearanceList, "cdidx", "CDNAME"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>List Clearance Code</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.listClearanceCode, new { @class = "k-textbox wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Special Clearance Code</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.SpecialClearanceNo, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+        </div>
+        <div class="panel-heading">
+            Delivery Information</div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>On Board Date</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.OnBoardDate, new { @class = "wfull case_date" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Cargo Type</b></div>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.TransportType, new SelectList(Model.transportList, "cdidx", "CDNAME"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Zip Code</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ConsigneeZipCode, new { @class = "form-control wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Zip Address</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ConsigneeZipAddress, new { @class = "form-control wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>English Zip Address</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.EngZipaddress, new { @class = "form-control wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Address</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.ConsigneeAddress, new { @class = "form-control wfull" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>English Address</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.EngAddress, new { @class = "form-control wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Memo</b></div>
+                <div class="col-xs-9">
+                    @Html.TextAreaFor(m => m.Memo, new { @class = "form-control wfull" })
+                </div>
+            </div>
+        </div>
+        <div class="panel-heading">
+            Cost of packages</div>
+        <div class="panel-body form-horizontal">
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Weight Type</b></div>
+                <div class="col-xs-3">
+                    @Html.DropDownListFor(m => m.WeightType, new SelectList(Model.weightTypeList, "cdidx", "CDNAME"), new { @class = "form-control" })
+                </div>
+                <div class="control-label col-xs-3">
+                    <b>Weight</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.Weight, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-xs-3">
+                    <b>Cartons</b></div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(m => m.Carton, new { @class = "k-textbox wfull" })
+                </div>
+            </div>
+        </div>
+        <div class="panel-heading">
+            Product Items <input type="button" id="btnNewItem" class="btn btn-default" value="New Item" /></div>
+        <div class="panel-body form-horizontal">
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        품목명
+                    </th>
+                    <th>
+                        수량
+                    </th>
+                    <th>
+                        단가
+                    </th>
+                    <th>
+                        합계
+                    </th>
+                    <th>
+                        삭제
+                    </th>
+                </tr>
+                @foreach (var item in Model.itemList)
+                {
+                <tr>
+                    <td>
+                        <a href="javascript:itemPopup('@item.pidx', null)">@item.itemName</a>
+                    </td>
+                    <td>
+                        @item.itemQty
+                    </td>
+                    <td>
+                        @item.itemAmt
+                    </td>
+                    <td>
+                        @item.ItemTotalAmt
+                    </td>
+                    <td>
+                        <a href="javascript:itemDelete('@item.pidx')">X</a>
+                    </td>
+                </tr>
+                }
+            </table>
+            
+        </div>
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-9 btnArea">
+                <button type="button" id="btnList" class="btn btn-default">
+                    List</button>
+                <button type="submit" id="btnSave" class="btn btn-primary">
+                    Save</button>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m=>m.hidx)
+}
+
+@using (Html.BeginForm("updateHouseItem", "BL", FormMethod.Post, new { role = "form", @class = "form-horizontal form-widgets", id = "frmHouseItem" }))
+{
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".case_date").kendoDatePicker();
+        $("#btnList").click(function () {
+            history.back();
+        });
+
+        $("#btnNewItem").click(function () {
+            itemPopup(null, @Model.hidx);
+        });
+    });
+
+    function itemPopup(pidx, hidx) {
+        $("#frmHouseItem").load("/BL/HouseItemDetail?pidx=" + pidx + "&hidx=" + hidx, function () {
+            $("#itemDetail").modal("show");
+        });
+    }
+
+    function itemDelete(pidx) {
+        var isDelete = confirm("선택한 아이템을 삭제하시겠습니까?");
+        if(isDelete)
+        {
+            $.ajax({
+                type: "POST",
+                url: "/BL/deleteHouseItem",
+                dataType: "json",
+                data: {pidx:pidx},
+                success: function (e) {
+                    if (e.ResultCode == "0") {
+                        location.reload();
+                    }
+                    else {
+                        alert(e.ResultMessage);
+                    }
+                }
+            });
+        }
+    }
+</script>

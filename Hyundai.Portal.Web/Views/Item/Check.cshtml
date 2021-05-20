@@ -1,0 +1,293 @@
+﻿@{
+    ViewBag.Title = "Console";
+}
+<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i>검수관리</strong></a>
+<hr />
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-inline" role="form" id="frmCustomer">
+        <div class="form-group">
+            <label for="startDate" class="searchTitle">
+                On Board Date</label>
+            <input type="text" id="startDate" class="case_date" />
+            ~
+            <input type="text" id="endDate" class="case_date" />
+            <button id="btnSearch" type="button" class="btn btn-default">
+                Search</button>
+        </div>
+        <div class="form-group">
+            <label for="mblNo" class="searchTitle">
+                MBL</label>
+            <select id="mblNo">
+            </select>
+        </div>
+        <button id="btnInput" type="button" class="btn btn-primary">
+            Manual Input</button>
+        </form>
+    </div>
+</div>
+<div class="row" style="padding-bottom: 20px;">
+    <label class="col-xs-3 control-label">
+        HBL No.
+    </label>
+    <div class="col-xs-5">
+        @Html.TextBox("HBLNo", null, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="col-xs-4" id="resultMessage">
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        <h4>
+            Non-inspected List <span id="hblUngroupCount"></span>
+        </h4>
+    </div>
+    <div class="col-xs-6">
+        <h4>
+            Inspected List <span id="hblCount"></span>
+        </h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        <div id="HBLUngroupList">
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div id="HBLList">
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var checkedrows = {};
+    var HBLList;
+    var midx;
+    var isEnable = true;
+
+    $(document).ready(function () {
+        var today = new Date();
+        $("#startDate").kendoDatePicker({
+            value: today
+        });
+        today.setDate(today.getDate() + 1);
+        $("#endDate").kendoDatePicker({
+            value: today
+        });
+        $("#mblNo").kendoDropDownList({
+            dataTextField: "mblNo",
+            dataValueField: "midx",
+            autoBind: false,
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "json",
+                        url: "/BL/getMBLList?searchKey=OnBoardDate&startDate=" + $("#startDate").val() + "&endDate=" + $("#endDate").val()
+                    }
+                }
+            },
+            select: function (e) {
+                var dataItem = this.dataItem(e.item.index());
+                midx = dataItem.midx;
+                $("#HBLList").data("kendoGrid").dataSource.options.transport.read.url = "/BL/getHBLList?searchKey=midx&searchText=" + midx;
+                $("#HBLList").data("kendoGrid").dataSource.read();
+                HblList.read();
+
+                $.ajax({
+                    url: "/BL/getMblStatus",
+                    data: { midx: midx },
+                    success: function (result) {
+                        if (result.statusCode != 31 && result.statusCode != 32) {
+                            isEnable = false;
+                        }
+                    },
+                    dataType: "json"
+                });
+            }
+        });
+
+        $("#btnSearch").click(function () {
+            checkedrows = {};
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            $("#mblNo").data("kendoDropDownList").dataSource.options.transport.read.url = "/BL/getMBLList?searchKey=OnBoardDate&startDate=" + startDate + "&endDate=" + endDate;
+            $("#mblNo").data("kendoDropDownList").dataSource.read();
+        });
+
+        HblList = new kendo.data.DataSource({
+            transport: {
+                dataType: "json",
+                read: "/BL/getHBLList?searchKey=noMbl&searchText=noMbl"
+            },
+            schema: {
+                model: {
+                    id: "hidx",
+                    fields: {
+                        hidx: { editable: false, nullable: true },
+                        mblNo: { validation: { required: true} },
+                        HblNo: { validation: { required: true} },
+                        OnBoardDate: { type: "date" },
+                        ShipperName: { validation: { required: true} },
+                        ConsigneeName: { validation: { required: true} },
+                        CreateDate: { type: "date" }
+                    }
+                }
+            }
+        });
+
+        $("#HBLList").kendoGrid({
+            height: 300,
+            autoSize: true,
+            autoBind: false,
+            dataSource: {
+                transport: {
+                    read: "/BL/getHBLList",
+                    dataType: "json"
+                },
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
+                schema: {
+                    model: {
+                        id: "hidx",
+                        fields: {
+                            hidx: { editable: false, nullable: true },
+                            midx: { defaultValue: midx },
+                            mblNo: { validation: { required: true} },
+                            HblNo: { validation: { required: true} },
+                            OnBoardDate: { type: "date" },
+                            ShipperName: { validation: { required: true} },
+                            ConsigneeName: { validation: { required: true} },
+                            CreateDate: { type: "date" }
+                        }
+                    }
+                }
+            },
+            scrollable: {
+                virtual: true
+            },
+            columns: [
+                { field: "HblNo", title: "HBL No" },
+                { field: "ShipperName", title: "Shipper Name" },
+                { field: "ConsigneeName", title: "Consignee Name" },
+                {
+                    field: "CreateDate",
+                    title: "등록일자",
+                    template: "#= kendo.toString(CreateDate, 'g') #"
+                }
+            ],
+            dataBound: function (e) {
+                var cnt = $('#HBLList').data('kendoGrid').dataSource.total();
+                $("#hblCount").text("(" + cnt + ")");
+            }
+        });
+
+        $("#HBLUngroupList").kendoGrid({
+            height: 300,
+            autoSize: true,
+            autoBind: false,
+            dataSource: HblList,
+            scrollable: {
+                virtual: true
+            },
+            columns: [
+                { field: "HblNo", title: "HBL No" },
+                { field: "ShipperName", title: "Shipper Name" },
+                { field: "ConsigneeName", title: "Consignee Name" },
+                {
+                    field: "OnBoardDate",
+                    title: "On Board Date",
+                    template: "#= kendo.toString(OnBoardDate, 'g') #"
+                }
+            ],
+            dataBound: function (e) {
+                var cnt = $('#HBLUngroupList').data('kendoGrid').dataSource.total();
+                $("#hblUngroupCount").text("(" + cnt + ")");
+            }
+        });
+
+        $("#btnInput").click(function () {
+            var number = prompt("Please enter the HBL number", "");
+            if (number) {
+                $("#HBLNo").val(number);
+                HBLlookout(number);
+            }
+        });
+
+        var pressed = false;
+        var chars = [];
+        $(window).keypress(function (e) {
+            if (e.which >= 48 && e.which <= 57) {
+                chars.push(String.fromCharCode(e.which));
+            }
+            if (pressed == false) {
+                var t = setTimeout(function () {
+                    if (chars.length >= 3) {
+                        var barcode = chars.join("");
+                        //console.log("Barcode Scanned: " + barcode);
+                        $("#HBLNo").val(barcode);
+                        var pressEnter = jQuery.Event("keypress");
+                        pressEnter.ctrlKey = false;
+                        pressEnter.which = 13;
+                        $("#HBLNo").trigger(pressEnter);
+                    }
+                    clearTimeout(t);
+                    chars = [];
+                    pressed = false;
+                }, 300);
+            }
+            pressed = true;
+        });
+
+        $("#HBLNo").keypress(function (e) {
+            var key = e.which;
+            if (key == 13)  // the enter key code
+            {
+                HBLlookout($("#HBLNo").val());
+            }
+        });
+    });
+
+    function HBLlookout(hblNo) {
+        if (!isEnable) {
+            $("#resultMessage").text("Please Check MBL status");
+            return;
+        }
+        var dataTable = HblList.data();
+        var dataItem;
+        for (var i = 0; i < dataTable.length; i++) {
+            if (dataTable[i].HblNo == hblNo) {
+                dataItem = dataTable[i];
+            }
+        }
+        var midx = $("#mblNo").data("kendoDropDownList").value();
+        var data = { hblNo: hblNo, midx: midx };
+        var textData = JSON.stringify(data);
+        $.post("/Item/updateHBLConsole", data, function (e) {
+            if (e.ResultCode == "0") {
+                $("#resultMessage").text("Success!!");
+                var audio2 = new Audio("/Sound/okay-1.wav");
+                audio2.play();
+                if (dataItem != null) {
+                    $("#HBLList").data("kendoGrid").dataSource.insert(0, dataItem);
+                    HblList.remove(dataItem);
+                }
+            }
+            else if (e.ResultCode == "-2") {
+                $("#resultMessage").text("HBL not found.");
+                var audio1 = new Audio("/Sound/no-1.wav");
+                audio1.play();
+            }
+            else if (e.ResultCode == "-3") {
+                $("#resultMessage").text(e.ResultMessage);
+                var audio3 = new Audio("/Sound/chime_up.wav");
+                audio3.play();
+            }
+            else {
+                alert(e.ResultMessage);
+            }
+        });
+        
+    }
+
+
+</script>

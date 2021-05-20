@@ -1,0 +1,333 @@
+﻿@{
+    ViewBag.Title = "Console";
+}
+
+<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i>MBL/HBL Console</strong></a>
+<hr />
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-inline" role="form" id="frmCustomer">
+            <div class="form-group">
+                <label for="startDate" class="searchTitle">
+                    Onboard Date</label>
+                <input type="text" id="startDate" class="case_date w150" /> ~
+                <input type="text" id="endDate" class="case_date w150" />
+                <button id="btnSearch" type="button" class="btn btn-default">
+                Search</button>
+            </div>
+            <div class="form-group">
+                <label for="mblNo" class="searchTitle">
+                    MBL</label>
+                <select id="mblNo">
+                </select>
+            </div>                
+            <button id="btnSave" type="button" class="btn btn-primary">
+                Save</button>
+            <button id="btnRelease" type="button" class="btn btn-warning">
+                Release</button>
+            <button id="btnExcel" type="button" class="btn btn-warning">
+                Excel Export</button>
+            <button id="btnAsiana" type="button" class="btn btn-warning">
+                Asiana Export</button>
+        </form>
+    </div>
+</div>
+<div id="HBLList"></div>
+<div class="row">
+    <div class="col-xs-12 arrowArea" style="text-align:center;">
+        <a href="javascript:void(0);" id="btnup"><span class="glyphicon glyphicon-chevron-up" style="font-size:20px;"></span></a>
+        <a href="javascript:void(0);" id="btndown"><span class="glyphicon glyphicon-chevron-down" style="font-size:20px;"></span></a>
+    </div>
+</div>
+<div id="HBLUngroupList"></div>
+
+<script type="text/javascript">
+    var checkedrows = {},checkedrows2 = {};
+    var midx;
+
+    $(document).ready(function () {
+        var today = new Date();
+        $("#startDate").kendoDatePicker({
+            value: today
+        });
+        today.setDate(today.getDate() + 1);
+        $("#endDate").kendoDatePicker({
+            value: today
+        });
+        $("#mblNo").kendoDropDownList({
+            dataTextField: "mblNo",
+            dataValueField: "midx",
+            autoBind: false,
+            dataSource: {
+                transport: {
+                    read: {
+                        dataType: "json",
+                        url: "/BL/getMBLList?searchKey=OnBoardDate&startDate=" + $("#startDate").val() + "&endDate=" + $("#endDate").val()
+                    }
+                }
+            },
+            select: function (e) {
+                var dataItem = this.dataItem(e.item.index());
+                midx = dataItem.midx;
+                $("#HBLList").data("kendoGrid").dataSource.options.transport.read.url = "/BL/getHBLList?searchKey=midx&searchText=" + midx;
+                console.log($("#HBLList").data("kendoGrid").dataSource.options.transport.read.url);
+                $("#HBLList").data("kendoGrid").dataSource.read();
+                $("#HBLUngroupList").data("kendoGrid").dataSource.read();
+
+                $.ajax({
+                    url: "/BL/getMblStatus",
+                    data: { midx: midx },
+                    success: function (result) {
+                        if (result.statusCode != 31 && result.statusCode != 32) {
+                            $("#btnSave").prop('disabled', true);
+                            $("#btnRelease").prop('disabled', true);
+                        }
+                        else {
+                            $("#btnSave").prop('disabled', false);
+                            $("#btnRelease").prop('disabled', false);
+                        }
+                    },
+                    dataType: "json"
+                });
+            }
+        });
+
+        $("#btnSearch").click(function () {
+            checkedrows = {};
+            checkedrows2 = {};
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+            $("#mblNo").data("kendoDropDownList").dataSource.options.transport.read.url = "/BL/getMBLList?searchKey=OnBoardDate&startDate=" + startDate + "&endDate=" + endDate;
+            $("#mblNo").data("kendoDropDownList").dataSource.read();
+        });
+
+        $("#HBLList").kendoGrid({
+            height: 180,
+            autoSize: true,
+            autoBind: false,
+            dataSource: {
+                transport: {
+                    dataType: "json",
+                    read: "/BL/getHBLList"
+                },
+                pageSize: 20,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
+                schema: {
+                    model: {
+                        id: "hidx",
+                        fields: {
+                            hidx: { editable: false, nullable: true },
+                            midx: { defaultValue: midx },
+                            mblNo: { validation: { required: true} },
+                            HblNo: { validation: { required: true} },
+                            OnBoardDate: { type: "date" },
+                            ShipperName: { validation: { required: true} },
+                            ConsigneeName: { validation: { required: true} },
+                            CreateDate: { type: "date" }
+                        }
+                    }
+                }
+            },
+            scrollable: {
+                virtual: true
+            },
+            columns: [
+                { field: "", width: 50, "template": "<input type=\"checkbox\" class=\"selectbox\" />", attributes: { style: "text-align:center;"} },
+                { field: "mblNo", title: "MBL No" },
+                { field: "HblNo", title: "HBL No" },
+                {
+                    field: "OnBoardDate",
+                    title: "발송일자",
+                    template: "#= kendo.toString(OnBoardDate, 'g') #"
+                },
+                { field: "ShipperName", title: "Shipper Name" },
+                { field: "ConsigneeName", title: "Consignee Name" },
+                {
+                    field: "CreateDate",
+                    title: "등록일자",
+                    template: "#= kendo.toString(CreateDate, 'g') #"
+                }
+            ],
+            dataBound: function (e) {
+                $("#HBLList .selectbox").on("click", function () {
+                    var checked = this.checked,
+                    row = $(this).closest("tr"),
+                    grid = $("#HBLList").data("kendoGrid"),
+                    dataItem = grid.dataItem(row);
+                    checkedrows[dataItem.uid] = checked;
+                });
+            }
+        });
+
+        $("#HBLUngroupList").kendoGrid({
+            height: 180,
+            autoSize: true,
+            autoBind: false,
+            dataSource: {
+                transport: {
+                    dataType: "json",
+                    read: "/BL/getHBLList?searchKey=noMbl&searchText=noMbl"
+                },
+                pageSize: 20,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
+                schema: {
+                    model: {
+                        id: "hidx",
+                        fields: {
+                            hidx: { editable: false, nullable: true },
+                            mblNo: { validation: { required: true} },
+                            HblNo: { validation: { required: true} },
+                            OnBoardDate: { type: "date" },
+                            ShipperName: { validation: { required: true} },
+                            ConsigneeName: { validation: { required: true} },
+                            CreateDate: { type: "date" }
+                        }
+                    }
+                }
+            },
+            scrollable: {
+                virtual: true
+            },
+            columns: [
+                { field: "", width: 50, "template": "<input type=\"checkbox\" class=\"selectbox\" />", attributes: { style: "text-align:center;"} },
+                { field: "mblNo", title: "MBL No" },
+                { field: "HblNo", title: "HBL No" },
+                {
+                    field: "OnBoardDate",
+                    title: "발송일자",
+                    template: "#= kendo.toString(OnBoardDate, 'g') #"
+                },
+                { field: "ShipperName", title: "Shipper Name" },
+                { field: "ConsigneeName", title: "Consignee Name" },
+                {
+                    field: "CreateDate",
+                    title: "등록일자",
+                    template: "#= kendo.toString(CreateDate, 'g') #"
+                }
+            ],
+            dataBound: function (e) {
+                $("#HBLUngroupList .selectbox").on("click", function () {
+                    var checked = this.checked,
+                    row = $(this).closest("tr"),
+                    grid = $("#HBLUngroupList").data("kendoGrid"),
+                    dataItem = grid.dataItem(row);
+                    checkedrows2[dataItem.uid] = checked;
+                });
+            }
+        });
+
+        $("#btnup").click(function () {
+            var items = [], item, grid = $("#HBLUngroupList").data("kendoGrid");
+
+            for (var uid in checkedrows) {
+                if (checkedrows.hasOwnProperty(uid)) {
+                    if (checkedrows[uid]) {
+                        item = grid.dataSource.getByUid(uid);
+                        items.push(item);
+                    }
+                }
+            }
+        });
+
+        $("#btndown").click(function () {
+            var items = [], item, grid = $("#HBLList").data("kendoGrid"), gridUn = $("#HBLUngroupList").data("kendoGrid");
+            console.log(checkedrows);
+            for (var uid in checkedrows) {
+                if (checkedrows.hasOwnProperty(uid)) {
+                    if (checkedrows[uid]) {
+                        item = grid.dataSource.getByUid(uid);
+                        gridUn.dataSource.add(item);
+                        grid.dataSource.remove(item);
+                    }
+                }
+            }
+            checkedrows = [];
+        });
+
+        $("#btnup").click(function () {
+            var items = [], item, grid = $("#HBLList").data("kendoGrid"), gridUn = $("#HBLUngroupList").data("kendoGrid");
+
+            for (var uid in checkedrows2) {
+                if (checkedrows2.hasOwnProperty(uid)) {
+                    if (checkedrows2[uid]) {
+                        item = gridUn.dataSource.getByUid(uid);
+                        grid.dataSource.add(item);
+                        gridUn.dataSource.remove(item);
+                    }
+                }
+            }
+            checkedrows2 = [];
+        });
+
+        $("#btnSave").click(function () {
+            checkedrows = {};
+            checkedrows2 = {};
+            var data = { midx: midx, hidx: [] };
+            var hblList = $("#HBLList").data("kendoGrid").dataSource.view();
+            for (var i = 0; i < hblList.length; i++) {
+                data.hidx.push(hblList[i].hidx);
+            }
+            $.ajax({
+                type: "POST",
+                url: "/BL/updateHBLConsoleList",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(data),
+                success: function (e) {
+                    if (e.ResultCode == "0") {
+                        var gridObj = $("#HBLList").data("kendoGrid");
+                        gridObj.dataSource.read();
+                        alert("Saved");
+                    }
+                    else {
+                        alert(e.ResultMessage);
+                    }
+                }
+            });
+        });
+
+        $("#btnExcel").click(function () {
+            if (midx == null) {
+                alert("MBL 을 선택해 주십시오");
+            }
+            else {
+                location.href = "/Console/HblExport?midx=" + midx;
+            }
+        });
+
+        $("#btnAsiana").click(function () {
+            if (midx == null) {
+                alert("MBL 을 선택해 주십시오");
+            }
+            else {
+                location.href = "/Console/AsianaExport?midx=" + midx;
+            }
+        });
+
+        $("#btnRelease").click(function () {
+            if (midx == null) {
+                alert("MBL을 선택해 주십시오.");
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Console/setRelease",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ midx: midx }),
+                success: function (e) {
+                    if (e.ResultCode == "0") {
+                        alert("출고 처리가 완료 되었습니다.");
+                    }
+                    else {
+                        alert(e.ResultMessage);
+                    }
+                }
+            });
+        });
+    });
+</script>

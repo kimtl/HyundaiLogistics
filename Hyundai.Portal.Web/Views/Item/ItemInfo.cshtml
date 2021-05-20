@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Master";
+}
+
+<a href="#"><strong><i class="glyphicon glyphicon-dashboard"></i>Item Detail</strong></a>
+<hr />
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form class="form-inline" role="form" id="frmMBL">
+            <div class="form-group">
+                <label for="startDate" class="searchTitle">
+                    Search By</label>
+                <select id="searchKey" class="form-control">
+                    <option value="MasterBL">Item Name</option>
+                    <option value="ShipperName">Item Brand</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" id="searchText" class="k-textbox" placeholder="Search text" />
+            </div>
+            <button id="btnSearch" type="button" class="btn btn-default">
+                Search</button>
+            <button id="btnRegister" type="button" class="btn btn-primary">
+                Register</button>
+        </form>
+    </div>
+</div>
+<div id="ItemList"></div>
+
+@using (Html.BeginForm("updateUser", "Item", FormMethod.Post, new { role = "form", @class = "form-horizontal form-widgets", id = "frmUserDetail" }))
+{
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var editUser = function (e) {
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            $("#frmUserDetail").load("/User/UserDetail?cidx=" + dataItem.uidx, function () {
+                $("#userDetail").modal("show");
+            });
+        };
+
+
+        $("#ItemList").kendoGrid({
+            height: 180,
+            autoSize: true,
+            dataSource: {
+                type: "json",
+                transport: {
+                    read: "/BL/getMBLList"
+                },
+                pageSize: 20,
+                serverPaging: false,
+                serverFiltering: false,
+                serverSorting: false,
+                schema: {
+                    model: {
+                        id: "pidx",
+                        fields: {
+                            pidx: { editable: false, nullable: true },
+                            userid: { validation: { required: true} },
+                            UserName: { validation: { required: true} },
+                            CustName: { validation: { required: true} },
+                            UserEmail: { validation: { required: true} },
+                            RegDate: { validation: { required: true} },
+                            UserType: { validation: { required: true} }
+                        }
+                    }
+                }
+            },
+            scrollable: {
+                virtual: true
+            },
+            columns: [
+                { field: "pidx", title: "ID" },
+                { field: "mblNo", title: "Item Name" },
+                { field: "UserName", title: "Item Amount" },
+                { field: "CustName", title: "Quantity" },
+                { field: "UserEmail", title: "Total Amount" },
+                { field: "RegDate", title: "Brand" },
+                { command: [{ text: "Edit", click: editUser}], title: "Command" }
+            ],
+            editable: "popup"
+        });
+
+        $("#btnSearch").click(function () {
+            var gridObj = $("#UserList").data("kendoGrid");
+            gridObj.dataSource.transport.options.read.url = String.format("/User/getUserList?searchKey={0}&searchText={1}", $("#searchKey").val(), $("#searchText").val());
+            gridObj.dataSource.read();
+        });
+
+        $("#btnRegister").click(function () {
+            $("#frmUserDetail").load("/User/UserDetail", function () {
+                $("#userDetail").modal("show");
+            });
+        });
+    });
+</script>

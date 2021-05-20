@@ -1,0 +1,1805 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HyundaiModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="HyundaiModelStoreContainer">
+          <EntitySet Name="CODE" EntityType="HyundaiModel.Store.CODE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CUSTOMER" EntityType="HyundaiModel.Store.CUSTOMER" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="HBL" EntityType="HyundaiModel.Store.HBL" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="HBLNO" EntityType="HyundaiModel.Store.HBLNO" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="INVOICEDETAIL" EntityType="HyundaiModel.Store.INVOICEDETAIL" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="INVOICEHEADER" EntityType="HyundaiModel.Store.INVOICEHEADER" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MBL" EntityType="HyundaiModel.Store.MBL" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OTHERCHARGE" EntityType="HyundaiModel.Store.OTHERCHARGE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PRODUCTITEM" EntityType="HyundaiModel.Store.PRODUCTITEM" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RATE" EntityType="HyundaiModel.Store.RATE" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="USER" EntityType="HyundaiModel.Store.USER" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ZIPCODE" EntityType="HyundaiModel.Store.ZIPCODE" store:Type="Tables" store:Schema="dbo" store:Name="ZIPCODE">
+            <DefiningQuery>SELECT 
+      [ZIPCODE].[Zipcode] AS [Zipcode], 
+      [ZIPCODE].[Address_Kor] AS [Address_Kor], 
+      [ZIPCODE].[Address_Eng] AS [Address_Eng], 
+      [ZIPCODE].[ZipCodeID] AS [ZipCodeID]
+      FROM [dbo].[ZIPCODE] AS [ZIPCODE]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="R_11" Association="HyundaiModel.Store.R_11">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="INVOICEHEADER" EntitySet="INVOICEHEADER" />
+          </AssociationSet>
+          <AssociationSet Name="R_12" Association="HyundaiModel.Store.R_12">
+            <End Role="INVOICEHEADER" EntitySet="INVOICEHEADER" />
+            <End Role="INVOICEDETAIL" EntitySet="INVOICEDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="R_14" Association="HyundaiModel.Store.R_14">
+            <End Role="MBL" EntitySet="MBL" />
+            <End Role="OTHERCHARGE" EntitySet="OTHERCHARGE" />
+          </AssociationSet>
+          <AssociationSet Name="R_16" Association="HyundaiModel.Store.R_16">
+            <End Role="HBL" EntitySet="HBL" />
+            <End Role="PRODUCTITEM" EntitySet="PRODUCTITEM" />
+          </AssociationSet>
+          <AssociationSet Name="R_18" Association="HyundaiModel.Store.R_18">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+          </AssociationSet>
+          <AssociationSet Name="R_19" Association="HyundaiModel.Store.R_19">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_2" Association="HyundaiModel.Store.R_2">
+            <End Role="MBL" EntitySet="MBL" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_21" Association="HyundaiModel.Store.R_21">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_22" Association="HyundaiModel.Store.R_22">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_23" Association="HyundaiModel.Store.R_23">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_24" Association="HyundaiModel.Store.R_24">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_25" Association="HyundaiModel.Store.R_25">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="RATE" EntitySet="RATE" />
+          </AssociationSet>
+          <AssociationSet Name="R_27" Association="HyundaiModel.Store.R_27">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="MBL" EntitySet="MBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_28" Association="HyundaiModel.Store.R_28">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="MBL" EntitySet="MBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_29" Association="HyundaiModel.Store.R_29">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="R_30" Association="HyundaiModel.Store.R_30">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="RATE" EntitySet="RATE" />
+          </AssociationSet>
+          <AssociationSet Name="R_31" Association="HyundaiModel.Store.R_31">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="USER1" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="R_33" Association="HyundaiModel.Store.R_33">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_34" Association="HyundaiModel.Store.R_34">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="MBL" EntitySet="MBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_35" Association="HyundaiModel.Store.R_35">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="MBL" EntitySet="MBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_38" Association="HyundaiModel.Store.R_38">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="MBL" EntitySet="MBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_5" Association="HyundaiModel.Store.R_5">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="R_6" Association="HyundaiModel.Store.R_6">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="RATE" EntitySet="RATE" />
+          </AssociationSet>
+          <AssociationSet Name="R_9" Association="HyundaiModel.Store.R_9">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CODE">
+          <Key>
+            <PropertyRef Name="cdidx" />
+          </Key>
+          <Property Name="cdidx" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GROUPCD" Type="int" />
+          <Property Name="CD" Type="varchar" MaxLength="10" />
+          <Property Name="CDNAME" Type="nvarchar" MaxLength="30" />
+          <Property Name="REMARK" Type="nvarchar" MaxLength="50" />
+          <Property Name="SORT" Type="smallint" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="cidx" />
+          </Key>
+          <Property Name="cidx" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustName" Type="nvarchar" MaxLength="30" />
+          <Property Name="CustAddress1" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustAddress2" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustCity" Type="nvarchar" MaxLength="30" />
+          <Property Name="CustState" Type="nvarchar" MaxLength="20" />
+          <Property Name="CustZip" Type="varchar" MaxLength="10" />
+          <Property Name="OwnerName" Type="nvarchar" MaxLength="20" />
+          <Property Name="TaxId" Type="varchar" MaxLength="11" />
+          <Property Name="WPhone" Type="varchar" MaxLength="20" />
+          <Property Name="Fax" Type="varchar" MaxLength="20" />
+          <Property Name="CPhone" Type="varchar" MaxLength="20" />
+          <Property Name="SpecialClearanceNo" Type="varchar" MaxLength="20" />
+          <Property Name="CustomerType" Type="int" />
+          <Property Name="CustEngName" Type="varchar" MaxLength="30" />
+          <Property Name="CustomerCd" Type="varchar" MaxLength="10" />
+          <Property Name="isDelete" Type="bit" Nullable="false" />
+          <Property Name="CustFullAddress" Type="text" />
+          <Property Name="ApiKey" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HBL">
+          <Key>
+            <PropertyRef Name="hidx" />
+          </Key>
+          <Property Name="hidx" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="midx" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="cidx" Type="int" />
+          <Property Name="MblNo" Type="varchar" MaxLength="14" />
+          <Property Name="HblNo" Type="varchar" MaxLength="20" />
+          <Property Name="OnBoardDate" Type="datetime" />
+          <Property Name="ShipperCd" Type="varchar" MaxLength="20" />
+          <Property Name="ShipperName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShipperPhone" Type="varchar" MaxLength="20" />
+          <Property Name="ShipperAddress" Type="varchar" MaxLength="100" />
+          <Property Name="RefNo" Type="varchar" MaxLength="20" />
+          <Property Name="ConsigneeName" Type="nvarchar" MaxLength="30" />
+          <Property Name="ConsigneePhone" Type="varchar" MaxLength="20" />
+          <Property Name="ConsigneeCellPhone" Type="varchar" MaxLength="20" />
+          <Property Name="ShipperZipCode" Type="varchar" MaxLength="5" />
+          <Property Name="ShipperZipAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="ConsigneeAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="EngZipaddress" Type="varchar(max)" />
+          <Property Name="EngAddress" Type="varchar(max)" />
+          <Property Name="juminNo" Type="varchar" MaxLength="20" />
+          <Property Name="Memo" Type="ntext" />
+          <Property Name="ConsigneeType" Type="int" />
+          <Property Name="Carton" Type="int" />
+          <Property Name="IsGeneralClearance" Type="int" />
+          <Property Name="ShipperEngName" Type="varchar" MaxLength="50" />
+          <Property Name="TransportType" Type="int" />
+          <Property Name="WeightType" Type="int" />
+          <Property Name="Weight" Type="money" />
+          <Property Name="listClearanceCode" Type="varchar" MaxLength="20" />
+          <Property Name="SpecialClearanceNo" Type="varchar" MaxLength="20" />
+          <Property Name="CreateId" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ShipperCity" Type="varchar" MaxLength="30" />
+          <Property Name="ShipperState" Type="varchar" MaxLength="20" />
+          <Property Name="ConsigneeZipCode" Type="varchar" MaxLength="7" />
+          <Property Name="ConsigneeZipAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="ConsigneeEngName" Type="varchar" MaxLength="30" />
+          <Property Name="value" Type="decimal" />
+        </EntityType>
+        <EntityType Name="HBLNO">
+          <Key>
+            <PropertyRef Name="HBLNO" />
+          </Key>
+          <Property Name="HBLNO" Type="char" Nullable="false" MaxLength="18" />
+          <Property Name="ISACTIVATE" Type="char" MaxLength="18" />
+        </EntityType>
+        <EntityType Name="INVOICEDETAIL">
+          <Key>
+            <PropertyRef Name="InvoiceNo" />
+            <PropertyRef Name="hidx" />
+          </Key>
+          <Property Name="InvoiceNo" Type="int" Nullable="false" />
+          <Property Name="hidx" Type="char" Nullable="false" MaxLength="18" />
+        </EntityType>
+        <EntityType Name="INVOICEHEADER">
+          <Key>
+            <PropertyRef Name="InvoiceNo" />
+          </Key>
+          <Property Name="cidx" Type="int" />
+          <Property Name="InvoiceNo" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="MBL">
+          <Key>
+            <PropertyRef Name="midx" />
+          </Key>
+          <Property Name="midx" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="mblNo" Type="char" MaxLength="14" />
+          <Property Name="status" Type="int" />
+          <Property Name="ShipperCd" Type="int" />
+          <Property Name="ShipperName" Type="varchar" MaxLength="50" />
+          <Property Name="ShipperAddress1" Type="varchar" MaxLength="50" />
+          <Property Name="ShipperAddress2" Type="varchar" MaxLength="50" />
+          <Property Name="ShipperCity" Type="varchar" MaxLength="30" />
+          <Property Name="ShipperState" Type="varchar" MaxLength="20" />
+          <Property Name="ShipperZip" Type="varchar" MaxLength="10" />
+          <Property Name="CneeCd" Type="int" />
+          <Property Name="CneeName" Type="varchar" MaxLength="50" />
+          <Property Name="CneeAddress1" Type="varchar" MaxLength="50" />
+          <Property Name="CneeAddress2" Type="varchar" MaxLength="50" />
+          <Property Name="CneeCity" Type="varchar" MaxLength="30" />
+          <Property Name="CneeState" Type="varchar" MaxLength="20" />
+          <Property Name="CneeZip" Type="varchar" MaxLength="10" />
+          <Property Name="DptrCd" Type="char" MaxLength="3" />
+          <Property Name="DptrName" Type="varchar" MaxLength="30" />
+          <Property Name="DestCd" Type="char" MaxLength="3" />
+          <Property Name="DestName" Type="varchar" MaxLength="30" />
+          <Property Name="FltNo" Type="varchar" MaxLength="10" />
+          <Property Name="To1" Type="varchar" MaxLength="10" />
+          <Property Name="By1" Type="varchar" MaxLength="10" />
+          <Property Name="To2" Type="varchar" MaxLength="10" />
+          <Property Name="By2" Type="varchar" MaxLength="10" />
+          <Property Name="PKGS" Type="int" />
+          <Property Name="GrossWT" Type="money" />
+          <Property Name="WTType" Type="int" />
+          <Property Name="RateClass" Type="char" MaxLength="1" />
+          <Property Name="VWT" Type="money" />
+          <Property Name="CWT" Type="money" />
+          <Property Name="RateChange" Type="money" />
+          <Property Name="FltTotalAmt" Type="money" />
+          <Property Name="AccountingInfo" Type="varchar" MaxLength="200" />
+          <Property Name="HandlingInfo" Type="varchar" MaxLength="200" />
+          <Property Name="SignatureOfShipperOrAgent" Type="varchar" MaxLength="100" />
+          <Property Name="NatureQuantityods" Type="varchar" MaxLength="1000" />
+          <Property Name="ByFirstCarrier" Type="varchar" MaxLength="10" />
+          <Property Name="IssuingCarrierName" Type="varchar" MaxLength="50" />
+          <Property Name="IATA" Type="varchar" MaxLength="20" />
+          <Property Name="AccountNo" Type="varchar" MaxLength="20" />
+          <Property Name="FltDate" Type="datetime" />
+          <Property Name="NotNetiableCustCd" Type="int" />
+          <Property Name="Currency" Type="char" MaxLength="3" />
+          <Property Name="ChagsCode" Type="varchar" MaxLength="5" />
+          <Property Name="WTVALPPD" Type="char" MaxLength="2" />
+          <Property Name="WTVALCOL" Type="char" MaxLength="2" />
+          <Property Name="OTHERPPD" Type="char" MaxLength="2" />
+          <Property Name="OTHERCOL" Type="char" MaxLength="2" />
+          <Property Name="DeclaredValueForCarriage" Type="varchar" MaxLength="10" />
+          <Property Name="DeclaredValueForCustoms" Type="varchar" MaxLength="10" />
+          <Property Name="TotalAmt" Type="money" />
+          <Property Name="SignatureOfIssuingCarrierOrAgent" Type="varchar" MaxLength="100" />
+          <Property Name="CreateId" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ArrivalDate" Type="datetime" />
+          <Property Name="CneePhone" Type="varchar" MaxLength="20" />
+          <Property Name="ShipperFullAddress" Type="text" />
+          <Property Name="CneeFullAddress" Type="text" />
+          <Property Name="NotNetiableText" Type="text" />
+          <Property Name="value" Type="money" />
+        </EntityType>
+        <EntityType Name="OTHERCHARGE">
+          <Key>
+            <PropertyRef Name="ocidx" />
+          </Key>
+          <Property Name="midx" Type="int" Nullable="false" />
+          <Property Name="chargeCd" Type="varchar" MaxLength="10" />
+          <Property Name="ChargeAmt" Type="money" />
+          <Property Name="ocidx" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="PRODUCTITEM">
+          <Key>
+            <PropertyRef Name="pidx" />
+          </Key>
+          <Property Name="pidx" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="itemName" Type="varchar(max)" />
+          <Property Name="itemAmt" Type="money" />
+          <Property Name="itemQty" Type="smallint" />
+          <Property Name="ItemTotalAmt" Type="money" />
+          <Property Name="hidx" Type="int" />
+          <Property Name="itemBrand" Type="varchar" MaxLength="20" />
+          <Property Name="url" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="RATE">
+          <Key>
+            <PropertyRef Name="ridx" />
+          </Key>
+          <Property Name="ridx" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="cidx" Type="int" />
+          <Property Name="applyDate" Type="datetime" />
+          <Property Name="baseRate" Type="money" />
+          <Property Name="WeightType" Type="int" />
+          <Property Name="extraRate" Type="money" />
+          <Property Name="RegId" Type="int" />
+          <Property Name="RegDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="uidx" />
+          </Key>
+          <Property Name="uidx" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="varchar" MaxLength="20" />
+          <Property Name="password" Type="varchar" MaxLength="20" />
+          <Property Name="cidx" Type="int" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserEmail" Type="varchar" MaxLength="50" />
+          <Property Name="RegId" Type="int" />
+          <Property Name="RegDate" Type="datetime" />
+          <Property Name="UserType" Type="int" />
+          <Property Name="isDelete" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'DB_9B2D14_hyundai.dbo.ZIPCODE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="ZIPCODE">
+          <Key>
+            <PropertyRef Name="ZipCodeID" />
+          </Key>
+          <Property Name="Zipcode" Type="varchar" MaxLength="7" />
+          <Property Name="Address_Kor" Type="nvarchar" MaxLength="300" />
+          <Property Name="Address_Eng" Type="varchar" MaxLength="300" />
+          <Property Name="ZipCodeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="R_11">
+          <End Role="CUSTOMER" Type="HyundaiModel.Store.CUSTOMER" Multiplicity="0..1" />
+          <End Role="INVOICEHEADER" Type="HyundaiModel.Store.INVOICEHEADER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="cidx" />
+            </Principal>
+            <Dependent Role="INVOICEHEADER">
+              <PropertyRef Name="cidx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_12">
+          <End Role="INVOICEHEADER" Type="HyundaiModel.Store.INVOICEHEADER" Multiplicity="1" />
+          <End Role="INVOICEDETAIL" Type="HyundaiModel.Store.INVOICEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INVOICEHEADER">
+              <PropertyRef Name="InvoiceNo" />
+            </Principal>
+            <Dependent Role="INVOICEDETAIL">
+              <PropertyRef Name="InvoiceNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_14">
+          <End Role="MBL" Type="HyundaiModel.Store.MBL" Multiplicity="1" />
+          <End Role="OTHERCHARGE" Type="HyundaiModel.Store.OTHERCHARGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MBL">
+              <PropertyRef Name="midx" />
+            </Principal>
+            <Dependent Role="OTHERCHARGE">
+              <PropertyRef Name="midx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_16">
+          <End Role="HBL" Type="HyundaiModel.Store.HBL" Multiplicity="0..1" />
+          <End Role="PRODUCTITEM" Type="HyundaiModel.Store.PRODUCTITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HBL">
+              <PropertyRef Name="hidx" />
+            </Principal>
+            <Dependent Role="PRODUCTITEM">
+              <PropertyRef Name="hidx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_18">
+          <End Role="CODE" Type="HyundaiModel.Store.CODE" Multiplicity="0..1" />
+          <End Role="CUSTOMER" Type="HyundaiModel.Store.CUSTOMER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="CUSTOMER">
+              <PropertyRef Name="CustomerType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_19">
+          <End Role="CODE" Type="HyundaiModel.Store.CODE" Multiplicity="0..1" />
+          <End Role="HBL" Type="HyundaiModel.Store.HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_2">
+          <End Role="MBL" Type="HyundaiModel.Store.MBL" Multiplicity="0..1" />
+          <End Role="HBL" Type="HyundaiModel.Store.HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MBL">
+              <PropertyRef Name="midx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="midx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_21">
+          <End Role="CODE" Type="HyundaiModel.Store.CODE" Multiplicity="0..1" />
+          <End Role="HBL" Type="HyundaiModel.Store.HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="ConsigneeType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_22">
+          <End Role="CODE" Type="HyundaiModel.Store.CODE" Multiplicity="0..1" />
+          <End Role="HBL" Type="HyundaiModel.Store.HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="TransportType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_23">
+          <End Role="CODE" Type="HyundaiModel.Store.CODE" Multiplicity="0..1" />
+          <End Role="HBL" Type="HyundaiModel.Store.HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="WeightType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_24">
+          <End Role="CODE" Type="HyundaiModel.Store.CODE" Multiplicity="0..1" />
+          <End Role="HBL" Type="HyundaiModel.Store.HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="IsGeneralClearance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_25">
+          <End Role="CODE" Type="HyundaiModel.Store.CODE" Multiplicity="0..1" />
+          <End Role="RATE" Type="HyundaiModel.Store.RATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="RATE">
+              <PropertyRef Name="WeightType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_27">
+          <End Role="CUSTOMER" Type="HyundaiModel.Store.CUSTOMER" Multiplicity="0..1" />
+          <End Role="MBL" Type="HyundaiModel.Store.MBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="cidx" />
+            </Principal>
+            <Dependent Role="MBL">
+              <PropertyRef Name="ShipperCd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_28">
+          <End Role="CUSTOMER" Type="HyundaiModel.Store.CUSTOMER" Multiplicity="0..1" />
+          <End Role="MBL" Type="HyundaiModel.Store.MBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="cidx" />
+            </Principal>
+            <Dependent Role="MBL">
+              <PropertyRef Name="CneeCd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_29">
+          <End Role="CODE" Type="HyundaiModel.Store.CODE" Multiplicity="0..1" />
+          <End Role="USER" Type="HyundaiModel.Store.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="UserType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_30">
+          <End Role="USER" Type="HyundaiModel.Store.USER" Multiplicity="0..1" />
+          <End Role="RATE" Type="HyundaiModel.Store.RATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uidx" />
+            </Principal>
+            <Dependent Role="RATE">
+              <PropertyRef Name="RegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_31">
+          <End Role="USER" Type="HyundaiModel.Store.USER" Multiplicity="0..1" />
+          <End Role="USER1" Type="HyundaiModel.Store.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uidx" />
+            </Principal>
+            <Dependent Role="USER1">
+              <PropertyRef Name="RegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_33">
+          <End Role="USER" Type="HyundaiModel.Store.USER" Multiplicity="0..1" />
+          <End Role="HBL" Type="HyundaiModel.Store.HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="CreateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_34">
+          <End Role="USER" Type="HyundaiModel.Store.USER" Multiplicity="0..1" />
+          <End Role="MBL" Type="HyundaiModel.Store.MBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uidx" />
+            </Principal>
+            <Dependent Role="MBL">
+              <PropertyRef Name="CreateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_35">
+          <End Role="CODE" Type="HyundaiModel.Store.CODE" Multiplicity="0..1" />
+          <End Role="MBL" Type="HyundaiModel.Store.MBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="MBL">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_38">
+          <End Role="CODE" Type="HyundaiModel.Store.CODE" Multiplicity="0..1" />
+          <End Role="MBL" Type="HyundaiModel.Store.MBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="MBL">
+              <PropertyRef Name="WTType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_5">
+          <End Role="CUSTOMER" Type="HyundaiModel.Store.CUSTOMER" Multiplicity="0..1" />
+          <End Role="USER" Type="HyundaiModel.Store.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="cidx" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="cidx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_6">
+          <End Role="CUSTOMER" Type="HyundaiModel.Store.CUSTOMER" Multiplicity="0..1" />
+          <End Role="RATE" Type="HyundaiModel.Store.RATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="cidx" />
+            </Principal>
+            <Dependent Role="RATE">
+              <PropertyRef Name="cidx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_9">
+          <End Role="CUSTOMER" Type="HyundaiModel.Store.CUSTOMER" Multiplicity="0..1" />
+          <End Role="HBL" Type="HyundaiModel.Store.HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="cidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="cidx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HyundaiModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="HyundaiEntities" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="CODE" EntityType="HyundaiModel.CODE" />
+          <EntitySet Name="CUSTOMER" EntityType="HyundaiModel.CUSTOMER" />
+          <EntitySet Name="HBL" EntityType="HyundaiModel.HBL" />
+          <EntitySet Name="HBLNO" EntityType="HyundaiModel.HBLNO" />
+          <EntitySet Name="INVOICEDETAIL" EntityType="HyundaiModel.INVOICEDETAIL" />
+          <EntitySet Name="INVOICEHEADER" EntityType="HyundaiModel.INVOICEHEADER" />
+          <EntitySet Name="MBL" EntityType="HyundaiModel.MBL" />
+          <EntitySet Name="OTHERCHARGE" EntityType="HyundaiModel.OTHERCHARGE" />
+          <EntitySet Name="PRODUCTITEM" EntityType="HyundaiModel.PRODUCTITEM" />
+          <EntitySet Name="RATE" EntityType="HyundaiModel.RATE" />
+          <EntitySet Name="USER" EntityType="HyundaiModel.USER" />
+          <EntitySet Name="ZIPCODE" EntityType="HyundaiModel.ZIPCODE" />
+          <AssociationSet Name="R_18" Association="HyundaiModel.R_18">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+          </AssociationSet>
+          <AssociationSet Name="R_19" Association="HyundaiModel.R_19">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_21" Association="HyundaiModel.R_21">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_22" Association="HyundaiModel.R_22">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_23" Association="HyundaiModel.R_23">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_24" Association="HyundaiModel.R_24">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_25" Association="HyundaiModel.R_25">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="RATE" EntitySet="RATE" />
+          </AssociationSet>
+          <AssociationSet Name="R_29" Association="HyundaiModel.R_29">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="R_35" Association="HyundaiModel.R_35">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="MBL" EntitySet="MBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_38" Association="HyundaiModel.R_38">
+            <End Role="CODE" EntitySet="CODE" />
+            <End Role="MBL" EntitySet="MBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_11" Association="HyundaiModel.R_11">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="INVOICEHEADER" EntitySet="INVOICEHEADER" />
+          </AssociationSet>
+          <AssociationSet Name="R_27" Association="HyundaiModel.R_27">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="MBL" EntitySet="MBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_28" Association="HyundaiModel.R_28">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="MBL" EntitySet="MBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_5" Association="HyundaiModel.R_5">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="R_6" Association="HyundaiModel.R_6">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="RATE" EntitySet="RATE" />
+          </AssociationSet>
+          <AssociationSet Name="R_9" Association="HyundaiModel.R_9">
+            <End Role="CUSTOMER" EntitySet="CUSTOMER" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_16" Association="HyundaiModel.R_16">
+            <End Role="HBL" EntitySet="HBL" />
+            <End Role="PRODUCTITEM" EntitySet="PRODUCTITEM" />
+          </AssociationSet>
+          <AssociationSet Name="R_2" Association="HyundaiModel.R_2">
+            <End Role="MBL" EntitySet="MBL" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_33" Association="HyundaiModel.R_33">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="HBL" EntitySet="HBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_12" Association="HyundaiModel.R_12">
+            <End Role="INVOICEHEADER" EntitySet="INVOICEHEADER" />
+            <End Role="INVOICEDETAIL" EntitySet="INVOICEDETAIL" />
+          </AssociationSet>
+          <AssociationSet Name="R_14" Association="HyundaiModel.R_14">
+            <End Role="MBL" EntitySet="MBL" />
+            <End Role="OTHERCHARGE" EntitySet="OTHERCHARGE" />
+          </AssociationSet>
+          <AssociationSet Name="R_34" Association="HyundaiModel.R_34">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="MBL" EntitySet="MBL" />
+          </AssociationSet>
+          <AssociationSet Name="R_30" Association="HyundaiModel.R_30">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="RATE" EntitySet="RATE" />
+          </AssociationSet>
+          <AssociationSet Name="R_31" Association="HyundaiModel.R_31">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="USER1" EntitySet="USER" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CODE">
+          <Key>
+            <PropertyRef Name="cdidx" />
+          </Key>
+          <Property Type="Int32" Name="cdidx" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="GROUPCD" />
+          <Property Type="String" Name="CD" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CDNAME" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="REMARK" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="SORT" />
+          <NavigationProperty Name="CUSTOMER" Relationship="HyundaiModel.R_18" FromRole="CODE" ToRole="CUSTOMER" />
+          <NavigationProperty Name="HBL" Relationship="HyundaiModel.R_19" FromRole="CODE" ToRole="HBL" />
+          <NavigationProperty Name="HBL1" Relationship="HyundaiModel.R_21" FromRole="CODE" ToRole="HBL" />
+          <NavigationProperty Name="HBL2" Relationship="HyundaiModel.R_22" FromRole="CODE" ToRole="HBL" />
+          <NavigationProperty Name="HBL3" Relationship="HyundaiModel.R_23" FromRole="CODE" ToRole="HBL" />
+          <NavigationProperty Name="HBL4" Relationship="HyundaiModel.R_24" FromRole="CODE" ToRole="HBL" />
+          <NavigationProperty Name="RATE" Relationship="HyundaiModel.R_25" FromRole="CODE" ToRole="RATE" />
+          <NavigationProperty Name="USER" Relationship="HyundaiModel.R_29" FromRole="CODE" ToRole="USER" />
+          <NavigationProperty Name="MBL" Relationship="HyundaiModel.R_35" FromRole="CODE" ToRole="MBL" />
+          <NavigationProperty Name="MBL1" Relationship="HyundaiModel.R_38" FromRole="CODE" ToRole="MBL" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="cidx" />
+          </Key>
+          <Property Type="Int32" Name="cidx" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CustName" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CustAddress1" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CustAddress2" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CustCity" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CustState" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CustZip" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OwnerName" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TaxId" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WPhone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Fax" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CPhone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SpecialClearanceNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CustomerType" />
+          <Property Type="String" Name="CustEngName" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CustomerCd" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="isDelete" Nullable="false" />
+          <Property Type="String" Name="CustFullAddress" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CODE" Relationship="HyundaiModel.R_18" FromRole="CUSTOMER" ToRole="CODE" />
+          <NavigationProperty Name="INVOICEHEADER" Relationship="HyundaiModel.R_11" FromRole="CUSTOMER" ToRole="INVOICEHEADER" />
+          <NavigationProperty Name="MBL" Relationship="HyundaiModel.R_27" FromRole="CUSTOMER" ToRole="MBL" />
+          <NavigationProperty Name="MBL1" Relationship="HyundaiModel.R_28" FromRole="CUSTOMER" ToRole="MBL" />
+          <NavigationProperty Name="USER" Relationship="HyundaiModel.R_5" FromRole="CUSTOMER" ToRole="USER" />
+          <NavigationProperty Name="RATE" Relationship="HyundaiModel.R_6" FromRole="CUSTOMER" ToRole="RATE" />
+          <NavigationProperty Name="HBL" Relationship="HyundaiModel.R_9" FromRole="CUSTOMER" ToRole="HBL" />
+          <Property Type="String" Name="ApiKey" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="HBL">
+          <Key>
+            <PropertyRef Name="hidx" />
+          </Key>
+          <Property Type="Int32" Name="hidx" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="midx" />
+          <Property Type="Int32" Name="Status" />
+          <Property Type="Int32" Name="cidx" />
+          <Property Type="String" Name="MblNo" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="HblNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="OnBoardDate" />
+          <Property Type="String" Name="ShipperCd" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShipperName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ShipperPhone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShipperAddress" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RefNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ConsigneeName" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ConsigneePhone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ConsigneeCellPhone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShipperZipCode" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShipperZipAddress" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ConsigneeAddress" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EngZipaddress" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EngAddress" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="juminNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Memo" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ConsigneeType" />
+          <Property Type="Int32" Name="Carton" />
+          <Property Type="Int32" Name="IsGeneralClearance" />
+          <Property Type="String" Name="ShipperEngName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="TransportType" />
+          <Property Type="Int32" Name="WeightType" />
+          <Property Type="Decimal" Name="Weight" Precision="19" Scale="4" />
+          <Property Type="String" Name="listClearanceCode" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SpecialClearanceNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreateId" />
+          <Property Type="DateTime" Name="CreateDate" />
+          <Property Type="String" Name="ShipperCity" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShipperState" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ConsigneeZipCode" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ConsigneeZipAddress" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ConsigneeEngName" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="value" Precision="18" Scale="0" />
+          <NavigationProperty Name="CODE" Relationship="HyundaiModel.R_19" FromRole="HBL" ToRole="CODE" />
+          <NavigationProperty Name="CODE1" Relationship="HyundaiModel.R_21" FromRole="HBL" ToRole="CODE" />
+          <NavigationProperty Name="CODE2" Relationship="HyundaiModel.R_22" FromRole="HBL" ToRole="CODE" />
+          <NavigationProperty Name="CODE3" Relationship="HyundaiModel.R_23" FromRole="HBL" ToRole="CODE" />
+          <NavigationProperty Name="CODE4" Relationship="HyundaiModel.R_24" FromRole="HBL" ToRole="CODE" />
+          <NavigationProperty Name="CUSTOMER" Relationship="HyundaiModel.R_9" FromRole="HBL" ToRole="CUSTOMER" />
+          <NavigationProperty Name="PRODUCTITEM" Relationship="HyundaiModel.R_16" FromRole="HBL" ToRole="PRODUCTITEM" />
+          <NavigationProperty Name="MBL" Relationship="HyundaiModel.R_2" FromRole="HBL" ToRole="MBL" />
+          <NavigationProperty Name="USER" Relationship="HyundaiModel.R_33" FromRole="HBL" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="HBLNO">
+          <Key>
+            <PropertyRef Name="HBLNO1" />
+          </Key>
+          <Property Type="String" Name="HBLNO1" Nullable="false" MaxLength="18" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ISACTIVATE" MaxLength="18" FixedLength="true" Unicode="false" />
+        </EntityType>
+        <EntityType Name="INVOICEDETAIL">
+          <Key>
+            <PropertyRef Name="InvoiceNo" />
+            <PropertyRef Name="hidx" />
+          </Key>
+          <Property Type="Int32" Name="InvoiceNo" Nullable="false" />
+          <Property Type="String" Name="hidx" Nullable="false" MaxLength="18" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="INVOICEHEADER" Relationship="HyundaiModel.R_12" FromRole="INVOICEDETAIL" ToRole="INVOICEHEADER" />
+        </EntityType>
+        <EntityType Name="INVOICEHEADER">
+          <Key>
+            <PropertyRef Name="InvoiceNo" />
+          </Key>
+          <Property Type="Int32" Name="cidx" />
+          <Property Type="Int32" Name="InvoiceNo" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="CUSTOMER" Relationship="HyundaiModel.R_11" FromRole="INVOICEHEADER" ToRole="CUSTOMER" />
+          <NavigationProperty Name="INVOICEDETAIL" Relationship="HyundaiModel.R_12" FromRole="INVOICEHEADER" ToRole="INVOICEDETAIL" />
+        </EntityType>
+        <EntityType Name="MBL">
+          <Key>
+            <PropertyRef Name="midx" />
+          </Key>
+          <Property Type="Int32" Name="midx" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="mblNo" MaxLength="14" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="status" />
+          <Property Type="Int32" Name="ShipperCd" />
+          <Property Type="String" Name="ShipperName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShipperAddress1" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShipperAddress2" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShipperCity" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShipperState" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShipperZip" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CneeCd" />
+          <Property Type="String" Name="CneeName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CneeAddress1" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CneeAddress2" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CneeCity" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CneeState" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CneeZip" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DptrCd" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="DptrName" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DestCd" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="DestName" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FltNo" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="To1" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="By1" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="To2" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="By2" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="PKGS" />
+          <Property Type="Decimal" Name="GrossWT" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="WTType" />
+          <Property Type="String" Name="RateClass" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Decimal" Name="VWT" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="CWT" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="RateChange" Precision="19" Scale="4" />
+          <Property Type="Decimal" Name="FltTotalAmt" Precision="19" Scale="4" />
+          <Property Type="String" Name="AccountingInfo" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="HandlingInfo" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SignatureOfShipperOrAgent" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NatureQuantityods" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ByFirstCarrier" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="IssuingCarrierName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="IATA" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AccountNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="FltDate" />
+          <Property Type="Int32" Name="NotNetiableCustCd" />
+          <Property Type="String" Name="Currency" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ChagsCode" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WTVALPPD" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="WTVALCOL" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="OTHERPPD" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="OTHERCOL" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="DeclaredValueForCarriage" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DeclaredValueForCustoms" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="TotalAmt" Precision="19" Scale="4" />
+          <Property Type="String" Name="SignatureOfIssuingCarrierOrAgent" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CreateId" />
+          <Property Type="DateTime" Name="CreateDate" />
+          <Property Type="DateTime" Name="ArrivalDate" />
+          <Property Type="String" Name="CneePhone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ShipperFullAddress" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CneeFullAddress" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NotNetiableText" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="value" Precision="19" Scale="4" />
+          <NavigationProperty Name="CODE" Relationship="HyundaiModel.R_35" FromRole="MBL" ToRole="CODE" />
+          <NavigationProperty Name="CODE1" Relationship="HyundaiModel.R_38" FromRole="MBL" ToRole="CODE" />
+          <NavigationProperty Name="CUSTOMER" Relationship="HyundaiModel.R_27" FromRole="MBL" ToRole="CUSTOMER" />
+          <NavigationProperty Name="CUSTOMER1" Relationship="HyundaiModel.R_28" FromRole="MBL" ToRole="CUSTOMER" />
+          <NavigationProperty Name="HBL" Relationship="HyundaiModel.R_2" FromRole="MBL" ToRole="HBL" />
+          <NavigationProperty Name="OTHERCHARGE" Relationship="HyundaiModel.R_14" FromRole="MBL" ToRole="OTHERCHARGE" />
+          <NavigationProperty Name="USER" Relationship="HyundaiModel.R_34" FromRole="MBL" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="OTHERCHARGE">
+          <Key>
+            <PropertyRef Name="ocidx" />
+          </Key>
+          <Property Type="Int32" Name="midx" Nullable="false" />
+          <Property Type="String" Name="chargeCd" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="ChargeAmt" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="ocidx" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="MBL" Relationship="HyundaiModel.R_14" FromRole="OTHERCHARGE" ToRole="MBL" />
+        </EntityType>
+        <EntityType Name="PRODUCTITEM">
+          <Key>
+            <PropertyRef Name="pidx" />
+          </Key>
+          <Property Type="Int32" Name="pidx" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="itemName" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="itemAmt" Precision="19" Scale="4" />
+          <Property Type="Int16" Name="itemQty" />
+          <Property Type="Decimal" Name="ItemTotalAmt" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="hidx" />
+          <Property Type="String" Name="itemBrand" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="url" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="HBL" Relationship="HyundaiModel.R_16" FromRole="PRODUCTITEM" ToRole="HBL" />
+        </EntityType>
+        <EntityType Name="RATE">
+          <Key>
+            <PropertyRef Name="ridx" />
+          </Key>
+          <Property Type="Int32" Name="ridx" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="cidx" />
+          <Property Type="DateTime" Name="applyDate" />
+          <Property Type="Decimal" Name="baseRate" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="WeightType" />
+          <Property Type="Decimal" Name="extraRate" Precision="19" Scale="4" />
+          <Property Type="Int32" Name="RegId" />
+          <Property Type="DateTime" Name="RegDate" />
+          <NavigationProperty Name="CODE" Relationship="HyundaiModel.R_25" FromRole="RATE" ToRole="CODE" />
+          <NavigationProperty Name="CUSTOMER" Relationship="HyundaiModel.R_6" FromRole="RATE" ToRole="CUSTOMER" />
+          <NavigationProperty Name="USER" Relationship="HyundaiModel.R_30" FromRole="RATE" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="uidx" />
+          </Key>
+          <Property Type="Int32" Name="uidx" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="userid" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="password" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="cidx" />
+          <Property Type="String" Name="UserName" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserEmail" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="RegId" />
+          <Property Type="DateTime" Name="RegDate" />
+          <Property Type="Int32" Name="UserType" />
+          <Property Type="Boolean" Name="isDelete" Nullable="false" />
+          <NavigationProperty Name="CODE" Relationship="HyundaiModel.R_29" FromRole="USER" ToRole="CODE" />
+          <NavigationProperty Name="CUSTOMER" Relationship="HyundaiModel.R_5" FromRole="USER" ToRole="CUSTOMER" />
+          <NavigationProperty Name="HBL" Relationship="HyundaiModel.R_33" FromRole="USER" ToRole="HBL" />
+          <NavigationProperty Name="MBL" Relationship="HyundaiModel.R_34" FromRole="USER" ToRole="MBL" />
+          <NavigationProperty Name="RATE" Relationship="HyundaiModel.R_30" FromRole="USER" ToRole="RATE" />
+          <NavigationProperty Name="USER1" Relationship="HyundaiModel.R_31" FromRole="USER" ToRole="USER1" />
+          <NavigationProperty Name="USER2" Relationship="HyundaiModel.R_31" FromRole="USER1" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="ZIPCODE">
+          <Key>
+            <PropertyRef Name="ZipCodeID" />
+          </Key>
+          <Property Type="String" Name="Zipcode1" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address_Kor" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address_Eng" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ZipCodeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="R_18">
+          <End Type="HyundaiModel.CODE" Role="CODE" Multiplicity="0..1" />
+          <End Type="HyundaiModel.CUSTOMER" Role="CUSTOMER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="CUSTOMER">
+              <PropertyRef Name="CustomerType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_19">
+          <End Type="HyundaiModel.CODE" Role="CODE" Multiplicity="0..1" />
+          <End Type="HyundaiModel.HBL" Role="HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_21">
+          <End Type="HyundaiModel.CODE" Role="CODE" Multiplicity="0..1" />
+          <End Type="HyundaiModel.HBL" Role="HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="ConsigneeType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_22">
+          <End Type="HyundaiModel.CODE" Role="CODE" Multiplicity="0..1" />
+          <End Type="HyundaiModel.HBL" Role="HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="TransportType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_23">
+          <End Type="HyundaiModel.CODE" Role="CODE" Multiplicity="0..1" />
+          <End Type="HyundaiModel.HBL" Role="HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="WeightType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_24">
+          <End Type="HyundaiModel.CODE" Role="CODE" Multiplicity="0..1" />
+          <End Type="HyundaiModel.HBL" Role="HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="IsGeneralClearance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_25">
+          <End Type="HyundaiModel.CODE" Role="CODE" Multiplicity="0..1" />
+          <End Type="HyundaiModel.RATE" Role="RATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="RATE">
+              <PropertyRef Name="WeightType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_29">
+          <End Type="HyundaiModel.CODE" Role="CODE" Multiplicity="0..1" />
+          <End Type="HyundaiModel.USER" Role="USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="UserType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_35">
+          <End Type="HyundaiModel.CODE" Role="CODE" Multiplicity="0..1" />
+          <End Type="HyundaiModel.MBL" Role="MBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="MBL">
+              <PropertyRef Name="status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_38">
+          <End Type="HyundaiModel.CODE" Role="CODE" Multiplicity="0..1" />
+          <End Type="HyundaiModel.MBL" Role="MBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CODE">
+              <PropertyRef Name="cdidx" />
+            </Principal>
+            <Dependent Role="MBL">
+              <PropertyRef Name="WTType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_11">
+          <End Type="HyundaiModel.CUSTOMER" Role="CUSTOMER" Multiplicity="0..1" />
+          <End Type="HyundaiModel.INVOICEHEADER" Role="INVOICEHEADER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="cidx" />
+            </Principal>
+            <Dependent Role="INVOICEHEADER">
+              <PropertyRef Name="cidx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_27">
+          <End Type="HyundaiModel.CUSTOMER" Role="CUSTOMER" Multiplicity="0..1" />
+          <End Type="HyundaiModel.MBL" Role="MBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="cidx" />
+            </Principal>
+            <Dependent Role="MBL">
+              <PropertyRef Name="ShipperCd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_28">
+          <End Type="HyundaiModel.CUSTOMER" Role="CUSTOMER" Multiplicity="0..1" />
+          <End Type="HyundaiModel.MBL" Role="MBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="cidx" />
+            </Principal>
+            <Dependent Role="MBL">
+              <PropertyRef Name="CneeCd" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_5">
+          <End Type="HyundaiModel.CUSTOMER" Role="CUSTOMER" Multiplicity="0..1" />
+          <End Type="HyundaiModel.USER" Role="USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="cidx" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="cidx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_6">
+          <End Type="HyundaiModel.CUSTOMER" Role="CUSTOMER" Multiplicity="0..1" />
+          <End Type="HyundaiModel.RATE" Role="RATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="cidx" />
+            </Principal>
+            <Dependent Role="RATE">
+              <PropertyRef Name="cidx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_9">
+          <End Type="HyundaiModel.CUSTOMER" Role="CUSTOMER" Multiplicity="0..1" />
+          <End Type="HyundaiModel.HBL" Role="HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMER">
+              <PropertyRef Name="cidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="cidx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_16">
+          <End Type="HyundaiModel.HBL" Role="HBL" Multiplicity="0..1" />
+          <End Type="HyundaiModel.PRODUCTITEM" Role="PRODUCTITEM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HBL">
+              <PropertyRef Name="hidx" />
+            </Principal>
+            <Dependent Role="PRODUCTITEM">
+              <PropertyRef Name="hidx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_2">
+          <End Type="HyundaiModel.MBL" Role="MBL" Multiplicity="0..1" />
+          <End Type="HyundaiModel.HBL" Role="HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MBL">
+              <PropertyRef Name="midx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="midx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_33">
+          <End Type="HyundaiModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="HyundaiModel.HBL" Role="HBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uidx" />
+            </Principal>
+            <Dependent Role="HBL">
+              <PropertyRef Name="CreateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_12">
+          <End Type="HyundaiModel.INVOICEHEADER" Role="INVOICEHEADER" Multiplicity="1" />
+          <End Type="HyundaiModel.INVOICEDETAIL" Role="INVOICEDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INVOICEHEADER">
+              <PropertyRef Name="InvoiceNo" />
+            </Principal>
+            <Dependent Role="INVOICEDETAIL">
+              <PropertyRef Name="InvoiceNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_14">
+          <End Type="HyundaiModel.MBL" Role="MBL" Multiplicity="1" />
+          <End Type="HyundaiModel.OTHERCHARGE" Role="OTHERCHARGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MBL">
+              <PropertyRef Name="midx" />
+            </Principal>
+            <Dependent Role="OTHERCHARGE">
+              <PropertyRef Name="midx" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_34">
+          <End Type="HyundaiModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="HyundaiModel.MBL" Role="MBL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uidx" />
+            </Principal>
+            <Dependent Role="MBL">
+              <PropertyRef Name="CreateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_30">
+          <End Type="HyundaiModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="HyundaiModel.RATE" Role="RATE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uidx" />
+            </Principal>
+            <Dependent Role="RATE">
+              <PropertyRef Name="RegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_31">
+          <End Type="HyundaiModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="HyundaiModel.USER" Role="USER1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="uidx" />
+            </Principal>
+            <Dependent Role="USER1">
+              <PropertyRef Name="RegId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HyundaiModelStoreContainer" CdmEntityContainer="HyundaiEntities">
+          <EntitySetMapping Name="CODE">
+            <EntityTypeMapping TypeName="HyundaiModel.CODE">
+              <MappingFragment StoreEntitySet="CODE">
+                <ScalarProperty Name="SORT" ColumnName="SORT" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="CDNAME" ColumnName="CDNAME" />
+                <ScalarProperty Name="CD" ColumnName="CD" />
+                <ScalarProperty Name="GROUPCD" ColumnName="GROUPCD" />
+                <ScalarProperty Name="cdidx" ColumnName="cdidx" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMER">
+            <EntityTypeMapping TypeName="HyundaiModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="ApiKey" ColumnName="ApiKey" />
+                <ScalarProperty Name="CustFullAddress" ColumnName="CustFullAddress" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="CustomerCd" ColumnName="CustomerCd" />
+                <ScalarProperty Name="CustEngName" ColumnName="CustEngName" />
+                <ScalarProperty Name="CustomerType" ColumnName="CustomerType" />
+                <ScalarProperty Name="SpecialClearanceNo" ColumnName="SpecialClearanceNo" />
+                <ScalarProperty Name="CPhone" ColumnName="CPhone" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="WPhone" ColumnName="WPhone" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
+                <ScalarProperty Name="CustZip" ColumnName="CustZip" />
+                <ScalarProperty Name="CustState" ColumnName="CustState" />
+                <ScalarProperty Name="CustCity" ColumnName="CustCity" />
+                <ScalarProperty Name="CustAddress2" ColumnName="CustAddress2" />
+                <ScalarProperty Name="CustAddress1" ColumnName="CustAddress1" />
+                <ScalarProperty Name="CustName" ColumnName="CustName" />
+                <ScalarProperty Name="cidx" ColumnName="cidx" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HBL">
+            <EntityTypeMapping TypeName="HyundaiModel.HBL">
+              <MappingFragment StoreEntitySet="HBL">
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="ConsigneeEngName" ColumnName="ConsigneeEngName" />
+                <ScalarProperty Name="ConsigneeZipAddress" ColumnName="ConsigneeZipAddress" />
+                <ScalarProperty Name="ConsigneeZipCode" ColumnName="ConsigneeZipCode" />
+                <ScalarProperty Name="ShipperState" ColumnName="ShipperState" />
+                <ScalarProperty Name="ShipperCity" ColumnName="ShipperCity" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateId" ColumnName="CreateId" />
+                <ScalarProperty Name="SpecialClearanceNo" ColumnName="SpecialClearanceNo" />
+                <ScalarProperty Name="listClearanceCode" ColumnName="listClearanceCode" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="WeightType" ColumnName="WeightType" />
+                <ScalarProperty Name="TransportType" ColumnName="TransportType" />
+                <ScalarProperty Name="ShipperEngName" ColumnName="ShipperEngName" />
+                <ScalarProperty Name="IsGeneralClearance" ColumnName="IsGeneralClearance" />
+                <ScalarProperty Name="Carton" ColumnName="Carton" />
+                <ScalarProperty Name="ConsigneeType" ColumnName="ConsigneeType" />
+                <ScalarProperty Name="Memo" ColumnName="Memo" />
+                <ScalarProperty Name="juminNo" ColumnName="juminNo" />
+                <ScalarProperty Name="EngAddress" ColumnName="EngAddress" />
+                <ScalarProperty Name="EngZipaddress" ColumnName="EngZipaddress" />
+                <ScalarProperty Name="ConsigneeAddress" ColumnName="ConsigneeAddress" />
+                <ScalarProperty Name="ShipperZipAddress" ColumnName="ShipperZipAddress" />
+                <ScalarProperty Name="ShipperZipCode" ColumnName="ShipperZipCode" />
+                <ScalarProperty Name="ConsigneeCellPhone" ColumnName="ConsigneeCellPhone" />
+                <ScalarProperty Name="ConsigneePhone" ColumnName="ConsigneePhone" />
+                <ScalarProperty Name="ConsigneeName" ColumnName="ConsigneeName" />
+                <ScalarProperty Name="RefNo" ColumnName="RefNo" />
+                <ScalarProperty Name="ShipperAddress" ColumnName="ShipperAddress" />
+                <ScalarProperty Name="ShipperPhone" ColumnName="ShipperPhone" />
+                <ScalarProperty Name="ShipperName" ColumnName="ShipperName" />
+                <ScalarProperty Name="ShipperCd" ColumnName="ShipperCd" />
+                <ScalarProperty Name="OnBoardDate" ColumnName="OnBoardDate" />
+                <ScalarProperty Name="HblNo" ColumnName="HblNo" />
+                <ScalarProperty Name="MblNo" ColumnName="MblNo" />
+                <ScalarProperty Name="cidx" ColumnName="cidx" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="midx" ColumnName="midx" />
+                <ScalarProperty Name="hidx" ColumnName="hidx" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HBLNO">
+            <EntityTypeMapping TypeName="HyundaiModel.HBLNO">
+              <MappingFragment StoreEntitySet="HBLNO">
+                <ScalarProperty Name="ISACTIVATE" ColumnName="ISACTIVATE" />
+                <ScalarProperty Name="HBLNO1" ColumnName="HBLNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVOICEDETAIL">
+            <EntityTypeMapping TypeName="HyundaiModel.INVOICEDETAIL">
+              <MappingFragment StoreEntitySet="INVOICEDETAIL">
+                <ScalarProperty Name="hidx" ColumnName="hidx" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVOICEHEADER">
+            <EntityTypeMapping TypeName="HyundaiModel.INVOICEHEADER">
+              <MappingFragment StoreEntitySet="INVOICEHEADER">
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="cidx" ColumnName="cidx" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MBL">
+            <EntityTypeMapping TypeName="HyundaiModel.MBL">
+              <MappingFragment StoreEntitySet="MBL">
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="NotNetiableText" ColumnName="NotNetiableText" />
+                <ScalarProperty Name="CneeFullAddress" ColumnName="CneeFullAddress" />
+                <ScalarProperty Name="ShipperFullAddress" ColumnName="ShipperFullAddress" />
+                <ScalarProperty Name="CneePhone" ColumnName="CneePhone" />
+                <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateId" ColumnName="CreateId" />
+                <ScalarProperty Name="SignatureOfIssuingCarrierOrAgent" ColumnName="SignatureOfIssuingCarrierOrAgent" />
+                <ScalarProperty Name="TotalAmt" ColumnName="TotalAmt" />
+                <ScalarProperty Name="DeclaredValueForCustoms" ColumnName="DeclaredValueForCustoms" />
+                <ScalarProperty Name="DeclaredValueForCarriage" ColumnName="DeclaredValueForCarriage" />
+                <ScalarProperty Name="OTHERCOL" ColumnName="OTHERCOL" />
+                <ScalarProperty Name="OTHERPPD" ColumnName="OTHERPPD" />
+                <ScalarProperty Name="WTVALCOL" ColumnName="WTVALCOL" />
+                <ScalarProperty Name="WTVALPPD" ColumnName="WTVALPPD" />
+                <ScalarProperty Name="ChagsCode" ColumnName="ChagsCode" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="NotNetiableCustCd" ColumnName="NotNetiableCustCd" />
+                <ScalarProperty Name="FltDate" ColumnName="FltDate" />
+                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+                <ScalarProperty Name="IATA" ColumnName="IATA" />
+                <ScalarProperty Name="IssuingCarrierName" ColumnName="IssuingCarrierName" />
+                <ScalarProperty Name="ByFirstCarrier" ColumnName="ByFirstCarrier" />
+                <ScalarProperty Name="NatureQuantityods" ColumnName="NatureQuantityods" />
+                <ScalarProperty Name="SignatureOfShipperOrAgent" ColumnName="SignatureOfShipperOrAgent" />
+                <ScalarProperty Name="HandlingInfo" ColumnName="HandlingInfo" />
+                <ScalarProperty Name="AccountingInfo" ColumnName="AccountingInfo" />
+                <ScalarProperty Name="FltTotalAmt" ColumnName="FltTotalAmt" />
+                <ScalarProperty Name="RateChange" ColumnName="RateChange" />
+                <ScalarProperty Name="CWT" ColumnName="CWT" />
+                <ScalarProperty Name="VWT" ColumnName="VWT" />
+                <ScalarProperty Name="RateClass" ColumnName="RateClass" />
+                <ScalarProperty Name="WTType" ColumnName="WTType" />
+                <ScalarProperty Name="GrossWT" ColumnName="GrossWT" />
+                <ScalarProperty Name="PKGS" ColumnName="PKGS" />
+                <ScalarProperty Name="By2" ColumnName="By2" />
+                <ScalarProperty Name="To2" ColumnName="To2" />
+                <ScalarProperty Name="By1" ColumnName="By1" />
+                <ScalarProperty Name="To1" ColumnName="To1" />
+                <ScalarProperty Name="FltNo" ColumnName="FltNo" />
+                <ScalarProperty Name="DestName" ColumnName="DestName" />
+                <ScalarProperty Name="DestCd" ColumnName="DestCd" />
+                <ScalarProperty Name="DptrName" ColumnName="DptrName" />
+                <ScalarProperty Name="DptrCd" ColumnName="DptrCd" />
+                <ScalarProperty Name="CneeZip" ColumnName="CneeZip" />
+                <ScalarProperty Name="CneeState" ColumnName="CneeState" />
+                <ScalarProperty Name="CneeCity" ColumnName="CneeCity" />
+                <ScalarProperty Name="CneeAddress2" ColumnName="CneeAddress2" />
+                <ScalarProperty Name="CneeAddress1" ColumnName="CneeAddress1" />
+                <ScalarProperty Name="CneeName" ColumnName="CneeName" />
+                <ScalarProperty Name="CneeCd" ColumnName="CneeCd" />
+                <ScalarProperty Name="ShipperZip" ColumnName="ShipperZip" />
+                <ScalarProperty Name="ShipperState" ColumnName="ShipperState" />
+                <ScalarProperty Name="ShipperCity" ColumnName="ShipperCity" />
+                <ScalarProperty Name="ShipperAddress2" ColumnName="ShipperAddress2" />
+                <ScalarProperty Name="ShipperAddress1" ColumnName="ShipperAddress1" />
+                <ScalarProperty Name="ShipperName" ColumnName="ShipperName" />
+                <ScalarProperty Name="ShipperCd" ColumnName="ShipperCd" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="mblNo" ColumnName="mblNo" />
+                <ScalarProperty Name="midx" ColumnName="midx" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OTHERCHARGE">
+            <EntityTypeMapping TypeName="HyundaiModel.OTHERCHARGE">
+              <MappingFragment StoreEntitySet="OTHERCHARGE">
+                <ScalarProperty Name="ocidx" ColumnName="ocidx" />
+                <ScalarProperty Name="ChargeAmt" ColumnName="ChargeAmt" />
+                <ScalarProperty Name="chargeCd" ColumnName="chargeCd" />
+                <ScalarProperty Name="midx" ColumnName="midx" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTITEM">
+            <EntityTypeMapping TypeName="HyundaiModel.PRODUCTITEM">
+              <MappingFragment StoreEntitySet="PRODUCTITEM">
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="itemBrand" ColumnName="itemBrand" />
+                <ScalarProperty Name="hidx" ColumnName="hidx" />
+                <ScalarProperty Name="ItemTotalAmt" ColumnName="ItemTotalAmt" />
+                <ScalarProperty Name="itemQty" ColumnName="itemQty" />
+                <ScalarProperty Name="itemAmt" ColumnName="itemAmt" />
+                <ScalarProperty Name="itemName" ColumnName="itemName" />
+                <ScalarProperty Name="pidx" ColumnName="pidx" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RATE">
+            <EntityTypeMapping TypeName="HyundaiModel.RATE">
+              <MappingFragment StoreEntitySet="RATE">
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="RegId" ColumnName="RegId" />
+                <ScalarProperty Name="extraRate" ColumnName="extraRate" />
+                <ScalarProperty Name="WeightType" ColumnName="WeightType" />
+                <ScalarProperty Name="baseRate" ColumnName="baseRate" />
+                <ScalarProperty Name="applyDate" ColumnName="applyDate" />
+                <ScalarProperty Name="cidx" ColumnName="cidx" />
+                <ScalarProperty Name="ridx" ColumnName="ridx" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER">
+            <EntityTypeMapping TypeName="HyundaiModel.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="RegId" ColumnName="RegId" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="cidx" ColumnName="cidx" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="uidx" ColumnName="uidx" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZIPCODE">
+            <EntityTypeMapping TypeName="HyundaiModel.ZIPCODE">
+              <MappingFragment StoreEntitySet="ZIPCODE">
+                <ScalarProperty Name="ZipCodeID" ColumnName="ZipCodeID" />
+                <ScalarProperty Name="Address_Eng" ColumnName="Address_Eng" />
+                <ScalarProperty Name="Address_Kor" ColumnName="Address_Kor" />
+                <ScalarProperty Name="Zipcode1" ColumnName="Zipcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Hyundai" ZoomLevel="21">
+        <EntityTypeShape EntityType="HyundaiModel.CODE" Width="1.5" PointX="0.75" PointY="10.75" Height="4.0956022135416674" />
+        <EntityTypeShape EntityType="HyundaiModel.CUSTOMER" Width="1.5" PointX="3" PointY="9.875" Height="5.8263151041666674" />
+        <EntityTypeShape EntityType="HyundaiModel.HBL" Width="1.5" PointX="12.5" PointY="7.75" Height="10.249248046875003" />
+        <EntityTypeShape EntityType="HyundaiModel.HBLNO" Width="1.5" PointX="0.75" PointY="0.75" Height="1.4033821614583388" />
+        <EntityTypeShape EntityType="HyundaiModel.INVOICEDETAIL" Width="1.5" PointX="7.5" PointY="12" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="HyundaiModel.INVOICEHEADER" Width="1.5" PointX="5.25" PointY="12" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="HyundaiModel.MBL" Width="1.5" PointX="10.25" PointY="5.75" Height="14.287578124999996" />
+        <EntityTypeShape EntityType="HyundaiModel.OTHERCHARGE" Width="1.5" PointX="12.5" PointY="22.875" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="HyundaiModel.PRODUCTITEM" Width="1.5" PointX="14.75" PointY="11.5" Height="2.749492187499996" />
+        <EntityTypeShape EntityType="HyundaiModel.RATE" Width="1.5" PointX="7.5" PointY="7.625" Height="3.1340950520833282" />
+        <EntityTypeShape EntityType="HyundaiModel.USER" Width="1.5" PointX="5.25" PointY="6.75" Height="4.2879036458333246" />
+        <EntityTypeShape EntityType="HyundaiModel.ZIPCODE" Width="1.5" PointX="2.75" PointY="0.75" Height="1.7879850260416674" />
+        <AssociationConnector Association="HyundaiModel.R_18" >
+          <ConnectorPoint PointX="2.25" PointY="12.797801106770834" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="12.797801106770834" />
+          <ConnectorPoint PointX="2.5833333333333335" PointY="12.797801106770834" />
+          <ConnectorPoint PointX="2.7916666666666665" PointY="12.797801106770834" />
+          <ConnectorPoint PointX="2.9583333333333335" PointY="12.797801106770834" />
+          <ConnectorPoint PointX="3" PointY="12.797801106770834" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_19" >
+          <ConnectorPoint PointX="2.25" PointY="11.742648553385422" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="11.74264855338542" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="11.742648553385422" />
+          <ConnectorPoint PointX="2.75" PointY="11.742648553385422" />
+          <ConnectorPoint PointX="2.75" PointY="5.5" />
+          <ConnectorPoint PointX="12.041666666666666" PointY="5.4999999999999991" />
+          <ConnectorPoint PointX="12.208333333333334" PointY="5.5" />
+          <ConnectorPoint PointX="12.557288666666667" PointY="5.4999999999999991" />
+          <ConnectorPoint PointX="12.723955333333334" PointY="5.5" />
+          <ConnectorPoint PointX="12.760414666666666" PointY="5.4999999999999991" />
+          <ConnectorPoint PointX="12.927081333333334" PointY="5.5" />
+          <ConnectorPoint PointX="13.25" PointY="5.5" />
+          <ConnectorPoint PointX="13.25" PointY="7.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_21" >
+          <ConnectorPoint PointX="2.25" PointY="13.852953660156246" />
+          <ConnectorPoint PointX="2.5" PointY="13.852953660156246" />
+          <ConnectorPoint PointX="2.5" PointY="5.25" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="5.2499999999999991" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="5.25" />
+          <ConnectorPoint PointX="12.557288666666667" PointY="5.2499999999999991" />
+          <ConnectorPoint PointX="12.723955333333334" PointY="5.25" />
+          <ConnectorPoint PointX="12.843748" PointY="5.25" />
+          <ConnectorPoint PointX="12.843748" PointY="7.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_22" >
+          <ConnectorPoint PointX="2.25" PointY="13.32537738346354" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="13.32537738346354" />
+          <ConnectorPoint PointX="2.5833333333333335" PointY="13.32537738346354" />
+          <ConnectorPoint PointX="2.875" PointY="13.32537738346354" />
+          <ConnectorPoint PointX="2.875" PointY="5.625" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="5.6249999999999991" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="5.625" />
+          <ConnectorPoint PointX="12.041666666666666" PointY="5.6249999999999991" />
+          <ConnectorPoint PointX="12.208333333333334" PointY="5.625" />
+          <ConnectorPoint PointX="12.557288666666667" PointY="5.6249999999999991" />
+          <ConnectorPoint PointX="12.723955333333334" PointY="5.625" />
+          <ConnectorPoint PointX="12.760414666666666" PointY="5.6249999999999991" />
+          <ConnectorPoint PointX="12.927081333333334" PointY="5.625" />
+          <ConnectorPoint PointX="13.166666666666666" PointY="5.6249999999999991" />
+          <ConnectorPoint PointX="13.333333333333334" PointY="5.625" />
+          <ConnectorPoint PointX="13.369792666666667" PointY="5.6249999999999991" />
+          <ConnectorPoint PointX="13.536459333333335" PointY="5.625" />
+          <ConnectorPoint PointX="13.656252" PointY="5.625" />
+          <ConnectorPoint PointX="13.656252" PointY="7.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_23" >
+          <ConnectorPoint PointX="1.5" PointY="10.75" />
+          <ConnectorPoint PointX="1.5" PointY="5.375" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="5.3749999999999991" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="5.375" />
+          <ConnectorPoint PointX="12.125" PointY="5.375" />
+          <ConnectorPoint PointX="12.125" PointY="12.874624023437502" />
+          <ConnectorPoint PointX="12.5" PointY="12.874624023437502" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_24" >
+          <ConnectorPoint PointX="2.25" PointY="12.270224830078128" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="12.270224830078128" />
+          <ConnectorPoint PointX="2.5833333333333335" PointY="12.270224830078128" />
+          <ConnectorPoint PointX="2.625" PointY="12.270224830078128" />
+          <ConnectorPoint PointX="2.625" PointY="5.125" />
+          <ConnectorPoint PointX="12.640622" PointY="5.125" />
+          <ConnectorPoint PointX="12.640622" PointY="7.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_25" >
+          <ConnectorPoint PointX="1.9062519999999998" PointY="10.75" />
+          <ConnectorPoint PointX="1.9062519999999998" PointY="9.1920475260416641" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="9.1920475260416623" />
+          <ConnectorPoint PointX="2.9583333333333335" PointY="9.1920475260416641" />
+          <ConnectorPoint PointX="4.666666666666667" PointY="9.1920475260416641" />
+          <ConnectorPoint PointX="4.833333333333333" PointY="9.1920475260416641" />
+          <ConnectorPoint PointX="5" PointY="9.1920475260416641" />
+          <ConnectorPoint PointX="5" PointY="11.287903645833325" />
+          <ConnectorPoint PointX="5.6985897435897437" PointY="11.287903645833325" />
+          <ConnectorPoint PointX="5.86525641025641" PointY="11.287903645833325" />
+          <ConnectorPoint PointX="6.1451282051282048" PointY="11.287903645833325" />
+          <ConnectorPoint PointX="6.3117948717948709" PointY="11.287903645833325" />
+          <ConnectorPoint PointX="7.125" PointY="11.287903645833325" />
+          <ConnectorPoint PointX="7.125" PointY="9.1920475260416641" />
+          <ConnectorPoint PointX="7.5" PointY="9.1920475260416641" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_29" >
+          <ConnectorPoint PointX="1.0937475" PointY="10.75" />
+          <ConnectorPoint PointX="1.0937475" PointY="7.971023763020832" />
+          <ConnectorPoint PointX="1.4166666666666667" PointY="7.9710237630208312" />
+          <ConnectorPoint PointX="1.5833333333333333" PointY="7.971023763020832" />
+          <ConnectorPoint PointX="2.4166666666666665" PointY="7.97102376302083" />
+          <ConnectorPoint PointX="2.9583333333333335" PointY="7.971023763020832" />
+          <ConnectorPoint PointX="4.666666666666667" PointY="7.9710237630208312" />
+          <ConnectorPoint PointX="4.833333333333333" PointY="7.971023763020832" />
+          <ConnectorPoint PointX="5.25" PointY="7.971023763020832" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_35" >
+          <ConnectorPoint PointX="1.5" PointY="14.845602213541667" />
+          <ConnectorPoint PointX="1.5" PointY="17.900696614583332" />
+          <ConnectorPoint PointX="10.25" PointY="17.900696614583332" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_38" >
+          <ConnectorPoint PointX="1.9062525" PointY="14.845602213541667" />
+          <ConnectorPoint PointX="1.9062525" PointY="16.801003359375006" />
+          <ConnectorPoint PointX="10.25" PointY="16.801003359375006" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_11" >
+          <ConnectorPoint PointX="4.5" PointY="12.893992513020834" />
+          <ConnectorPoint PointX="4.666666666666667" PointY="12.893992513020834" />
+          <ConnectorPoint PointX="4.833333333333333" PointY="12.893992513020834" />
+          <ConnectorPoint PointX="5.25" PointY="12.893992513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_27" >
+          <ConnectorPoint PointX="4.5" PointY="14.775900065104167" />
+          <ConnectorPoint PointX="10.25" PointY="14.775900065104167" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_28" >
+          <ConnectorPoint PointX="4.5" PointY="14.250692545572917" />
+          <ConnectorPoint PointX="10.25" PointY="14.250692545572917" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_5" >
+          <ConnectorPoint PointX="4.5" PointY="10.456451822916662" />
+          <ConnectorPoint PointX="4.666666666666667" PointY="10.456451822916662" />
+          <ConnectorPoint PointX="4.833333333333333" PointY="10.456451822916662" />
+          <ConnectorPoint PointX="4.916666666666667" PointY="10.456451822916662" />
+          <ConnectorPoint PointX="5.083333333333333" PointY="10.456451822916662" />
+          <ConnectorPoint PointX="5.25" PointY="10.456451822916662" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_6" >
+          <ConnectorPoint PointX="4.5" PointY="12.059695579427086" />
+          <ConnectorPoint PointX="4.666666666666667" PointY="12.059695579427086" />
+          <ConnectorPoint PointX="4.833333333333333" PointY="12.059695579427086" />
+          <ConnectorPoint PointX="5" PointY="12.059695579427086" />
+          <ConnectorPoint PointX="5" PointY="11.75" />
+          <ConnectorPoint PointX="8.25" PointY="11.75" />
+          <ConnectorPoint PointX="8.25" PointY="10.759095052083328" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_9" >
+          <ConnectorPoint PointX="4.5" PointY="13.572342529296876" />
+          <ConnectorPoint PointX="4.75" PointY="13.572342529296876" />
+          <ConnectorPoint PointX="4.75" PointY="5.5625" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="5.5624999999999991" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="5.5625" />
+          <ConnectorPoint PointX="12.041666666666666" PointY="5.5624999999999991" />
+          <ConnectorPoint PointX="12.208333333333334" PointY="5.5625" />
+          <ConnectorPoint PointX="12.557288666666667" PointY="5.5624999999999991" />
+          <ConnectorPoint PointX="12.723955333333334" PointY="5.5625" />
+          <ConnectorPoint PointX="12.760414666666666" PointY="5.5624999999999991" />
+          <ConnectorPoint PointX="12.927081333333334" PointY="5.5625" />
+          <ConnectorPoint PointX="13.046873999999999" PointY="5.5625" />
+          <ConnectorPoint PointX="13.046873999999999" PointY="7.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_16" >
+          <ConnectorPoint PointX="14" PointY="12.874746093749998" />
+          <ConnectorPoint PointX="14.75" PointY="12.874746093749998" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_2" >
+          <ConnectorPoint PointX="11.75" PointY="10.249812011718751" />
+          <ConnectorPoint PointX="12.041666666666666" PointY="10.249812011718751" />
+          <ConnectorPoint PointX="12.208333333333334" PointY="10.249812011718751" />
+          <ConnectorPoint PointX="12.5" PointY="10.249812011718751" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_33" >
+          <ConnectorPoint PointX="6.75" PointY="7.9710242630208317" />
+          <ConnectorPoint PointX="7.25" PointY="7.9710242630208317" />
+          <ConnectorPoint PointX="7.25" PointY="5.4375" />
+          <ConnectorPoint PointX="12.557288666666667" PointY="5.4374999999999991" />
+          <ConnectorPoint PointX="12.723955333333334" PointY="5.4375" />
+          <ConnectorPoint PointX="12.760414666666666" PointY="5.4374999999999991" />
+          <ConnectorPoint PointX="12.927081333333334" PointY="5.4375" />
+          <ConnectorPoint PointX="13.453126000000001" PointY="5.4375" />
+          <ConnectorPoint PointX="13.453126000000001" PointY="7.75" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_12" >
+          <ConnectorPoint PointX="6.75" PointY="12.797841796875002" />
+          <ConnectorPoint PointX="7.5" PointY="12.797841796875002" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_14" >
+          <ConnectorPoint PointX="11" PointY="20.037578124999996" />
+          <ConnectorPoint PointX="11" PointY="23.865143229166669" />
+          <ConnectorPoint PointX="12.5" PointY="23.865143229166669" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_34" >
+          <ConnectorPoint PointX="6.75" PointY="7.15625" />
+          <ConnectorPoint PointX="7.166666666666667" PointY="7.1562499999999991" />
+          <ConnectorPoint PointX="7.333333333333333" PointY="7.15625" />
+          <ConnectorPoint PointX="10.25" PointY="7.15625" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_30" >
+          <ConnectorPoint PointX="6.75" PointY="10.038071289062497" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="10.038071289062497" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="10.038071289062497" />
+          <ConnectorPoint PointX="7.5" PointY="10.038071289062497" />
+        </AssociationConnector>
+        <AssociationConnector Association="HyundaiModel.R_31" >
+          <ConnectorPoint PointX="5.7819230769230767" PointY="11.037903645833325" />
+          <ConnectorPoint PointX="5.7819230769230767" PointY="11.412903645833325" />
+          <ConnectorPoint PointX="6.2284615384615378" PointY="11.412903645833325" />
+          <ConnectorPoint PointX="6.2284615384615378" PointY="11.037903645833325" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

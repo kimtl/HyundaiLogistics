@@ -1,0 +1,95 @@
+﻿@{
+    Layout = null;
+}
+<div class="modal fade" id="customerDetailRate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×</button>
+                <h4 class="modal-title">
+                    거래처 요율관리</h4>
+            </div>
+            <div class="modal-body">
+                <div id="rateList"></div>
+                <div class="modal-footer">
+                    <button type="button" id="btnNewRate" class="btn btn-default">
+                        Add Rate</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancel</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    @Html.Hidden("cidx")
+</div>
+
+@using (Html.BeginForm("updateRate", "Customer", FormMethod.Post, new { role = "form", @class = "form-horizontal form-widgets", id = "frmRateDetail" }))
+{
+}
+<script type="text/javascript">
+    var codeList = [{ value: "K", text: "KG" }, { value: "L", text: "LBS"}];
+    var editRateDetail = function (e) {
+        var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+        $("#frmRateDetail").load("/Customer/CustomerRateDetail?ridx=" + dataItem.ridx, function () {
+            $("#rateDetail").modal("show");
+        });
+    }
+
+    var newRateDetail = function () {
+        $("#frmRateDetail").load("/Customer/CustomerRateDetail", function () {
+            $("#rateDetail").modal("show");
+            $("#frmRateDetail #cidx").val($("#customerDetailRate #cidx").val())
+        });
+    }
+
+    $(document).ready(function () {
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: "/Customer/getRateList",
+                    dataType: "json"
+                }
+            },
+            batch: false,
+            pageSize: 20,
+            schema: {
+                model: {
+                    id: "ridx",
+                    fields: {
+                        ridx: { editable: false, nullable: true },
+                        cidx: { editable: false, nullable: true, type: "number", defaultValue: "4" },
+                        applyDate: { type: "date", validation: { required: true} },
+                        baseRate: { type: "number", validation: { min: 0, required: true} },
+                        weightType: { type: "string", defaultValue: "Ks" },
+                        extraRate: { type: "number" }
+                    }
+                }
+            }
+        });
+        dataSource.fetch(function () {
+            var data = this.data();
+            console.log(data);
+        });
+
+        $("#rateList").kendoGrid({
+            dataSource: dataSource,
+            pageable: true,
+            autoBind: false,
+            height: 550,
+            columns: [
+                { field: "applyDate", title: "적용 일자", template: '#= kendo.toString(applyDate, "d") #' },
+                { field: "weightType", title: "무게 단위", values: codeList },
+                { field: "baseRate", title: "기본 요율", format: "{0:c}" },
+                { field: "extraRate", title: "추가 요율", format: "{0:c}" },
+                { command: [{ text: "Edit", click: editRateDetail}] }
+            ]
+        });
+
+        $("#btnNewRate").click(newRateDetail);
+    });
+</script>
